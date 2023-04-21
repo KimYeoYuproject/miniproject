@@ -49,7 +49,8 @@ public class CouponController {
         boolean result = false;
         // 오늘과 쿠폰 날짜 차이 6개월 계산
         Optional<CouponVO> getCoupon = couponDTO.findByCoupon(coupon);
-        if (getCoupon.get().getEndDate().getTime() >= new Date().getTime()) {
+        if (getCoupon.get().getEndDate().getTime() >= new Date().getTime()
+                && getCoupon.get().getAvailable() == true) {
             result = true;
         }
 
