@@ -47,6 +47,25 @@ public class MenuDTO {
             }
         }
         return result;
+    }
 
+    public boolean deleteAllBymenu() {
+        boolean result = false;
+        for (int i = 0; i < menuVO.size(); i++) {
+            menuVO.remove(i);
+        }
+        if (menuVO == null) {
+            result = true;
+        }
+        return result;
+    }
+
+    public List<String> findAllCategory() {
+        List<String> category = new ArrayList<>();
+
+        for (MenuVO m : menuVO) {
+            category.add(m.getCategory());
+        }
+        return category;
     }
 }

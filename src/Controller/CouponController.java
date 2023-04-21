@@ -1,6 +1,5 @@
 package Controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,6 @@ import Model.CouponVO;
 public class CouponController {
 
     private Random random = new Random();
-    private CouponVO couponVO = new CouponVO();
     private CouponDTO couponDTO = new CouponDTO();
 
     public String randomCouponGenerator(int length) {
@@ -29,8 +27,15 @@ public class CouponController {
         return coupon.toString();
     }
 
-    public void couponGenerate(int number) {
-        couponDTO.saveByCoupon(randomCouponGenerator(number));
+    public void couponGenerate(int number, int length) {
+        for (int i = 0; i < number; i++) {
+            String newCoupon = randomCouponGenerator(length);
+            if (!existCoupon(newCoupon) == false) {
+                couponDTO.saveByCoupon(newCoupon);
+            } else {
+                number--;
+            }
+        }
     }
 
     public boolean existCoupon(String coupon) {
