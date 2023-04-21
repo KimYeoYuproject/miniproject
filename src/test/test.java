@@ -12,5 +12,6 @@ public class test {
         System.out.println("하이하이1");
         System.out.println("승철 머지");
         System.out.println("민지 머지");
+        System.out.println("미지 머지");
     }
 }
