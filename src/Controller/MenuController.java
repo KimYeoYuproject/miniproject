@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import DTO.MenuDTO;
 import Model.MenuVO;
@@ -11,7 +12,7 @@ public class MenuController {
     private MenuDTO menuDTO = new MenuDTO();
 
     public boolean saveByMenu(MenuVO menu) {
-        if (menuDTO.findByMenu(menu.getName()) != null) {
+        if (menuDTO.findByMenu(menu.getName()) == null) {
             menuDTO.saveByMenu(menu);
             return true;
         }
@@ -45,7 +46,7 @@ public class MenuController {
         return menuDTO.deleteAllBymenu();
     }
 
-    public Optional<List<String>> findAllCategory() {
+    public Optional<Set<String>> findAllCategory() {
         return Optional.of(menuDTO.findAllCategory());
     }
 

@@ -1,5 +1,6 @@
 package View.Testview.testYu;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -38,6 +39,7 @@ public class TestMenu {
         String name = null;
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
+        System.out.println(name);
         MenuVO menuVO = menuController.findByMenu(name).get();
         if (menuVO != null) {
             System.out.println(menuVO);
@@ -90,18 +92,18 @@ public class TestMenu {
 
         System.out.println("변경이 없으면 공란 엔터");
 
-        System.out.printf("메뉴 이름 (%s)", menuList.get(number).getName());
+        System.out.printf("메뉴 이름(변경 없으면 공란) (%s) : ", menuList.get(number).getName());
         name = sc.nextLine();
-        menuList.get(number).setName(name.length() == 0 ? null : name);
+        menuList.get(number).setName(name == null ? menuList.get(number).getName() : name);
 
-        System.out.printf("메뉴 이름 (%s)", menuList.get(number).getCategory());
+        System.out.printf("메뉴 카테고리(변경 없으면 공란) (%s) : ", menuList.get(number).getCategory());
         category = sc.nextLine();
-        menuList.get(number).setCategory(category.length() == 0 ? null : category);
+        menuList.get(number).setCategory(category == null ? menuList.get(number).getCategory() : category);
 
-        System.out.printf("메뉴 이름 (%s)", menuList.get(number).getPrice());
+        System.out.printf("메뉴 이름(수정 없으면 0입력) (%s) : ", menuList.get(number).getPrice());
         price = sc.nextInt();
         sc.nextLine();
-        menuList.get(number).setPrice(price == 0 ? null : price);
+        menuList.get(number).setPrice(price == 0 ? menuList.get(number).getPrice() : price);
 
         menuController.modifyByMenu(menuList.get(number));
 
@@ -109,48 +111,42 @@ public class TestMenu {
 
     public void testMenu() {
         int number = 0;
-        try {
-            label: while (true) {
-                System.out.println("1. 메뉴 추가 ");
-                System.out.println("2. 메뉴 조회");
-                System.out.println("3. 메뉴 전체 조회");
-                System.out.println("4. 메뉴 수정");
-                System.out.println("5. 메뉴 삭제");
-                System.out.println("6. 메뉴 카테고리 조회");
-                System.out.println("9.종료 ");
-                System.out.print("사용할 메뉴 선택 : ");
-                number = sc.nextInt();
-                sc.nextLine();
-                switch (number) {
-                    case 1:
-                        addMenu();
-                        break;
-                    case 2:
-                        findByMenu();
-                        break;
-                    case 3:
-                        findAllByMenu();
-                        break;
-                    case 4:
-                        modifyByMenu();
-                        break;
-                    case 5:
-                        deleteByMenu();
-                        break;
-                    case 6:
-                        findAllCategory();
-                        break;
-                    case 9:
-                        break label;
-                    default:
-                        System.out.println("없는 메뉴 입니다.");
-                        break;
-
-                }
+        label: while (true) {
+            System.out.println("1. 메뉴 추가 ");
+            System.out.println("2. 메뉴 조회");
+            System.out.println("3. 메뉴 전체 조회");
+            System.out.println("4. 메뉴 수정");
+            System.out.println("5. 메뉴 삭제");
+            System.out.println("6. 메뉴 카테고리 조회");
+            System.out.println("9.종료 ");
+            System.out.print("사용할 메뉴 선택 : ");
+            number = sc.nextInt();
+            sc.nextLine();
+            switch (number) {
+                case 1:
+                    addMenu();
+                    break;
+                case 2:
+                    findByMenu();
+                    break;
+                case 3:
+                    findAllByMenu();
+                    break;
+                case 4:
+                    modifyByMenu();
+                    break;
+                case 5:
+                    deleteByMenu();
+                    break;
+                case 6:
+                    findAllCategory();
+                    break;
+                case 9:
+                    break label;
+                default:
+                    System.out.println("없는 메뉴 입니다.");
+                    break;
             }
-
-        } catch (Exception e) {
-            System.out.println("찰못 입력햇습니다.");
         }
     }
 }

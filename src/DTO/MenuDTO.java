@@ -1,7 +1,9 @@
 package DTO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import Model.MenuVO;
 
@@ -60,8 +62,8 @@ public class MenuDTO {
         return result;
     }
 
-    public List<String> findAllCategory() {
-        List<String> category = new ArrayList<>();
+    public Set<String> findAllCategory() {
+        Set<String> category = new HashSet<>();
 
         for (MenuVO m : menuVO) {
             category.add(m.getCategory());
