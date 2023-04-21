@@ -1,6 +1,5 @@
 package View.Testview.testYu;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
