@@ -5,5 +5,6 @@ public class test {
         System.out.println("dff");
         System.out.println();
         System.out.println("하이");
+        System.out.println("미지테스트");
     }
 }
