@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -23,6 +24,7 @@ public class CouponController {
             index = random.nextInt(listitem.length());
             coupon.append(listitem.charAt(index));
         }
+        System.out.println(coupon);
         return coupon.toString();
     }
 
@@ -53,6 +55,10 @@ public class CouponController {
         Optional<CouponVO> couponVO = couponDTO.findByCoupon(coupon.toUpperCase());
         couponVO.get().setAvailable(false);
         couponDTO.modifyByCoupon(couponVO);
+    }
+
+    public Optional<List<CouponVO>> findAllByCounpon() {
+        return couponDTO.findAllByCoupon();
     }
 
 }

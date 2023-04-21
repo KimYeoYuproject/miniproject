@@ -12,13 +12,15 @@ public class TestView {
 
     public void testView() {
         int number = 0;
-        System.out.println("테스트 담당자 선택");
-        System.out.println("1. 김민지");
-        System.out.println("2. 여미지");
-        System.out.println("3. 유승철");
-        sc.nextInt();
 
         label: while (true) {
+            System.out.println("테스트 담당자 선택");
+            System.out.println("1. 김민지");
+            System.out.println("2. 여미지");
+            System.out.println("3. 유승철");
+            System.out.println("4. 종료 하기");
+            System.out.print("번호 입력 : ");
+            number = sc.nextInt();
             switch (number) {
                 case 1:
                     new TestKim().view();
@@ -29,8 +31,11 @@ public class TestView {
                 case 3:
                     new TestYu().view();
                     break;
-                default:
+                case 4:
                     break label;
+                default:
+                    System.out.println("다시 입력하세요");
+                    break;
             }
         }
     }
