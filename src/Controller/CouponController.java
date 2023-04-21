@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Random;
 
@@ -40,7 +41,10 @@ public class CouponController {
     public boolean availableCoupon(String coupon) {
         boolean result = false;
         // 오늘과 쿠폰 날짜 차이 6개월 계산
-        Optional<CouponVO> date = couponDTO.findByCoupon(coupon);
+        Optional<CouponVO> getCoupon = couponDTO.findByCoupon(coupon);
+        if (getCoupon.get().getEndDate().getTime() >= new Date().getTime()) {
+            result = true;
+        }
 
         return result;
     }
