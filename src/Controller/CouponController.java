@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +11,9 @@ import Model.CouponVO;
 
 public class CouponController {
 
-    Random random = new Random();
-    CouponVO couponVO = new CouponVO();
-    CouponDTO couponDTO = new CouponDTO();
+    private Random random = new Random();
+    private CouponVO couponVO = new CouponVO();
+    private CouponDTO couponDTO = new CouponDTO();
 
     public String randomCouponGenerator(int length) {
         int index = 0;
@@ -24,7 +25,7 @@ public class CouponController {
             index = random.nextInt(listitem.length());
             coupon.append(listitem.charAt(index));
         }
-        System.out.println(coupon);
+
         return coupon.toString();
     }
 
@@ -36,8 +37,12 @@ public class CouponController {
         return couponDTO.findByCoupon(coupon.toUpperCase()) != null ? true : false;
     }
 
-    public void deleteCoupon(String coupon) {
-        couponDTO.deleteByCoupon(coupon.toUpperCase());
+    public Optional<CouponVO> findByCoupon(String coupon) {
+        return couponDTO.findByCoupon(coupon);
+    }
+
+    public boolean deleteCoupon(String coupon) {
+        return couponDTO.deleteByCoupon(coupon.toUpperCase());
     }
 
     public boolean availableCoupon(String coupon) {
@@ -53,6 +58,8 @@ public class CouponController {
 
     public void useCoupon(String coupon) {
         Optional<CouponVO> couponVO = couponDTO.findByCoupon(coupon.toUpperCase());
+        System.out.println(couponVO.get().getCoupon());
+
         couponVO.get().setAvailable(false);
         couponDTO.modifyByCoupon(couponVO);
     }

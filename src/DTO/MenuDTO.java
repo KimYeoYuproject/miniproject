@@ -10,7 +10,7 @@ public class MenuDTO {
 
     public MenuVO findByMenu(String menuName) {
         for (MenuVO m : menuVO) {
-            if (m.getName() == menuName) {
+            if (m.getName().equals(menuName)) {
                 return m;
             }
         }
@@ -28,7 +28,7 @@ public class MenuDTO {
     public boolean modifyByMenu(MenuVO menu) {
         boolean result = false;
         for (int i = 0; i < menuVO.size(); i++) {
-            if (menuVO.get(i).getName() == menu.getName()) {
+            if (menuVO.get(i).getName().equals(menu.getName())) {
                 menuVO.get(i).setName(menu.getName());
                 menuVO.get(i).setCategory(menu.getCategory());
                 menuVO.get(i).setPrice(menu.getPrice());
@@ -41,7 +41,7 @@ public class MenuDTO {
     public boolean deleteByMenu(String menuName) {
         boolean result = false;
         for (int i = 0; i < menuVO.size(); i++) {
-            if (menuVO.get(i).getName() == menuName) {
+            if (menuVO.get(i).getName().equals(menuName)) {
                 menuVO.remove(i);
                 result = true;
             }

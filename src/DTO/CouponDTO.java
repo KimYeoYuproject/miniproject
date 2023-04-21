@@ -10,16 +10,12 @@ import Model.CouponVO;
 
 public class CouponDTO {
 
-    List<CouponVO> coupons = new ArrayList<>();
+    private List<CouponVO> coupons = new ArrayList<>();
 
     public Optional<CouponVO> findByCoupon(String coupon) {
         for (CouponVO c : coupons) {
-            if (c == null) {
-                break;
-            } else {
-                if (c.getCoupon() == coupon) {
-                    return Optional.of(c);
-                }
+            if (c.getCoupon().equals(coupon.toUpperCase())) {
+                return Optional.of(c);
             }
         }
         return null;
@@ -35,14 +31,13 @@ public class CouponDTO {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.MONTH, 6);
-        System.out.println(cal);
         coupons.add(new CouponVO(coupon, cal.getTime(), true));
     }
 
     public boolean deleteByCoupon(String coupon) {
         boolean isExist = false;
         for (int i = 0; i < coupons.size(); i++) {
-            if (coupons.get(i).getCoupon() == coupon) {
+            if (coupons.get(i).getCoupon().equals(coupon)) {
                 coupons.remove(i);
                 isExist = true;
             }
