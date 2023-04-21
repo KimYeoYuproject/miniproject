@@ -6,6 +6,8 @@ public class test {
         System.out.println();
         System.out.println("하이");
         System.out.println("민지");
-        System.out.println("승철");
+        System.out.println("민지");
+        System.out.println("하이하이1");
+        System.out.println("승철 머지");
     }
 }
