@@ -11,6 +11,12 @@ public class MenuController {
 
     private MenuDTO menuDTO = new MenuDTO();
 
+    /**
+     * 메뉴 저장
+     * 
+     * @param menu 메뉴 객체
+     * @return
+     */
     public boolean saveByMenu(MenuVO menu) {
         if (menuDTO.findByMenu(menu.getName()) == null) {
             menuDTO.saveByMenu(menu);
@@ -19,6 +25,12 @@ public class MenuController {
         return false;
     }
 
+    /**
+     * 메뉴 수정
+     * 
+     * @param menu
+     * @return
+     */
     public boolean modifyByMenu(MenuVO menu) {
         MenuVO menuVO = findByMenu(menu.getName()).get();
         if (menuVO != null) {
@@ -27,14 +39,31 @@ public class MenuController {
         return false;
     }
 
+    /**
+     * 메뉴 이름으로 찾아 정보 표시
+     * 
+     * @param menuName
+     * @return
+     */
     public Optional<MenuVO> findByMenu(String menuName) {
         return Optional.of(menuDTO.findByMenu(menuName));
     }
 
+    /**
+     * 메뉴 전체 조회
+     * 
+     * @return
+     */
     public Optional<List<MenuVO>> findAllByMenu() {
         return Optional.of(menuDTO.findAllByMenu());
     }
 
+    /**
+     * 메뉴 삭제
+     * 
+     * @param menuName
+     * @return
+     */
     public boolean deleteBymenu(String menuName) {
         if (findByMenu(menuName).get() == null) {
             return false;
@@ -42,10 +71,20 @@ public class MenuController {
         return menuDTO.deleteByMenu(menuName);
     }
 
+    /**
+     * 메뉴 전체 삭제
+     * 
+     * @return
+     */
     public boolean deleteAllBymenu() {
         return menuDTO.deleteAllBymenu();
     }
 
+    /**
+     * 카테고리 추출항 리스트 만드는 메소드
+     * 
+     * @return
+     */
     public Optional<Set<String>> findAllCategory() {
         return Optional.of(menuDTO.findAllCategory());
     }
