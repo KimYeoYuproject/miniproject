@@ -76,6 +76,7 @@ public class CouponView {
     }
 
     public void couponView() {
+        ClearConsole.clear();
         int number = 0;
         try {
             label: while (true) {
@@ -85,10 +86,12 @@ public class CouponView {
                 System.out.println("4. 쿠폰 사용");
                 System.out.println("5. 쿠폰 사용 가능 여부 조회");
                 System.out.println("6. 쿠폰 삭제");
-                System.out.println("7.종료 ");
+                System.out.println("9. 종료 ");
+                System.out.println();
                 System.out.print("사용할 메뉴 선택 : ");
                 number = sc.nextInt();
                 sc.nextLine();
+
                 switch (number) {
                     case 1:
                         createCoupon(10, 20);
@@ -108,7 +111,7 @@ public class CouponView {
                     case 6:
                         delCoupon();
                         break;
-                    case 7:
+                    case 9:
                         break label;
                     default:
                         System.out.println("없는 메뉴 입니다.");

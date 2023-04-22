@@ -20,6 +20,7 @@ public class AdminView {
     }
 
     public void adminView() throws IOException {
+        ClearConsole.clear();
         label: while (true) {
             System.out.println("======= 관리자 메뉴 ========");
             System.out.println("1. 주문 관리");
@@ -27,8 +28,11 @@ public class AdminView {
             System.out.println("3. 쿠폰 관리");
             System.out.println("4. 주문 내역");
             System.out.println("9. 관리자 메뉴 종료");
+            System.out.println();
+            System.out.print("메뉴를 입력하세요 : ");
             number = sc.nextInt();
             sc.nextLine();
+
             switch (number) {
                 case 1:
                     new CoffeMenuView(menuController).coffeMenu();

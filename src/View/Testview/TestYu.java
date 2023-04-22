@@ -1,32 +1,42 @@
 package View.Testview;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-import View.CoffeMenuView;
-import View.CouponView;
+import Controller.CouponController;
+import Controller.MenuController;
+import View.AdminView;
+import View.ClearConsole;
 
 public class TestYu {
 
     private Scanner sc = new Scanner(System.in);
 
     public void view() {
+        ClearConsole.clear();
         int number = 0;
         label: while (true) {
             System.out.println("테스트 메뉴 선택");
-            System.out.println("1. 쿠폰");
+            System.out.println("1. 관리자페이지");
             System.out.println("2. 주문메뉴");
-            System.out.println("3. 종료");
+            System.out.println("9. 종료");
+            System.out.println();
             System.out.print("사용할 메뉴 선택 : ");
             number = sc.nextInt();
             sc.nextLine();
             switch (number) {
                 case 1:
-
+                    try {
+                        new AdminView(new CouponController(), new MenuController()).adminView();
+                    } catch (IOException e) {
+                        System.out.println("오류가 발생했습니다.");
+                        e.printStackTrace();
+                    }
                     break;
                 case 2:
 
                     break;
-                case 3:
+                case 9:
                     break label;
                 default:
                     System.out.println("없는 메뉴 입니다.");

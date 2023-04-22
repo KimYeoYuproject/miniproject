@@ -11,8 +11,8 @@ public class TestView {
     Scanner sc = new Scanner(System.in);
 
     public void testView() {
+        ClearConsole.clear();
         int number = 0;
-
         label: while (true) {
             System.out.println("테스트 담당자 선택");
             System.out.println("1. 김민지");

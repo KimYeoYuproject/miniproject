@@ -113,6 +113,7 @@ public class CoffeMenuView {
     }
 
     public void coffeMenu() {
+        ClearConsole.clear();
         int number = 0;
         label: while (true) {
             System.out.println("1. 메뉴 추가 ");
@@ -121,7 +122,8 @@ public class CoffeMenuView {
             System.out.println("4. 메뉴 수정");
             System.out.println("5. 메뉴 삭제");
             System.out.println("6. 메뉴 카테고리 조회");
-            System.out.println("9.종료 ");
+            System.out.println("9. 종료 ");
+            System.out.println();
             System.out.print("사용할 메뉴 선택 : ");
             number = sc.nextInt();
             sc.nextLine();
