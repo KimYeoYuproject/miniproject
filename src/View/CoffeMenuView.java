@@ -1,4 +1,4 @@
-package View.Testview.testYu;
+package View;
 
 import java.util.Date;
 import java.util.List;
@@ -7,10 +7,14 @@ import java.util.Scanner;
 import Controller.MenuController;
 import Model.MenuVO;
 
-public class TestMenu {
-    private MenuController menuController = new MenuController();
+public class CoffeMenuView {
+    private MenuController menuController;
 
     private Scanner sc = new Scanner(System.in);
+
+    public CoffeMenuView(MenuController menuController) {
+        this.menuController = menuController;
+    }
 
     public void addMenu() {
 
@@ -108,7 +112,7 @@ public class TestMenu {
 
     }
 
-    public void testMenu() {
+    public void coffeMenu() {
         int number = 0;
         label: while (true) {
             System.out.println("1. 메뉴 추가 ");

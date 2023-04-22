@@ -2,8 +2,8 @@ package View.Testview;
 
 import java.util.Scanner;
 
-import View.Testview.testYu.TestCoupon;
-import View.Testview.testYu.TestMenu;
+import View.CoffeMenuView;
+import View.CouponView;
 
 public class TestYu {
 
@@ -21,10 +21,10 @@ public class TestYu {
             sc.nextLine();
             switch (number) {
                 case 1:
-                    new TestCoupon().testCoupon();
+
                     break;
                 case 2:
-                    new TestMenu().testMenu();
+
                     break;
                 case 3:
                     break label;

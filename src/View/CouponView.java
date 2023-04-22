@@ -1,17 +1,19 @@
-package View.Testview.testYu;
+package View;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import Controller.CouponController;
 import Model.CouponVO;
 
-public class TestCoupon {
-    private CouponController controller = new CouponController();
+public class CouponView {
+    private CouponController controller;
     private Scanner sc = new Scanner(System.in);
-    private Optional<List<CouponVO>> coupons = controller.findAllByCounpon();
+
+    public CouponView(CouponController controller) {
+        this.controller = controller;
+    }
 
     public void findCoupon() {
         String findCoupon = null;
@@ -26,8 +28,9 @@ public class TestCoupon {
     }
 
     public void printCoupon() {
+        List<CouponVO> coupons = controller.findAllByCounpon().get();
         int count = 0;
-        for (CouponVO c : coupons.get()) {
+        for (CouponVO c : coupons) {
             System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n", count++, c.getCoupon(),
                     new SimpleDateFormat("YYYY-MM-dd").format(c.getEndDate()), c.getAvailable());
         }
@@ -72,7 +75,7 @@ public class TestCoupon {
         }
     }
 
-    public void testCoupon() {
+    public void couponView() {
         int number = 0;
         try {
             label: while (true) {
