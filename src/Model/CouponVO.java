@@ -32,12 +32,12 @@ public class CouponVO {
         this.coupon = coupon;
     }
 
-    public Date getEndDate() {
+    public Date getExpDate() {
         return expDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.expDate = endDate;
+    public void setExpDate(Date expDate) {
+        this.expDate = expDate;
     }
 
     public boolean getAvailable() {

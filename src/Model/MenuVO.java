@@ -1,8 +1,12 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MenuVO {
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-d HH:MM:ss");
+
     private String name;
 
     private String category;
@@ -13,8 +17,8 @@ public class MenuVO {
 
     @Override
     public String toString() {
-        return "MenuVO [name=" + name + ", category=" + category + ", price=" + price + ", createDate=" + createDate
-                + "]";
+        return "메뉴명 : " + name + ", 카테고리 : " + category + ", 가격 :" + price + ", 생성시간 : "
+                + simpleDateFormat.format(createDate);
     }
 
     public MenuVO() {

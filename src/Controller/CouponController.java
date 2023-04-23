@@ -1,5 +1,11 @@
 package Controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +48,7 @@ public class CouponController {
     public void couponGenerate(int number, int length) {
         for (int i = 0; i < number; i++) {
             String newCoupon = randomCouponGenerator(length);
-            if (!existCoupon(newCoupon) == false) {
+            if (existCoupon(newCoupon) == false) {
                 couponDTO.saveByCoupon(newCoupon);
             } else {
                 number--;
@@ -66,7 +72,7 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      * @return
      */
-    public Optional<CouponVO> findByCoupon(String coupon) {
+    public CouponVO findByCoupon(String coupon) {
         return couponDTO.findByCoupon(coupon);
     }
 
@@ -75,7 +81,7 @@ public class CouponController {
      * 
      * @return
      */
-    public Optional<List<CouponVO>> findAllByCounpon() {
+    public List<CouponVO> findAllByCounpon() {
         return couponDTO.findAllByCoupon();
     }
 
@@ -98,10 +104,14 @@ public class CouponController {
     public boolean availableCoupon(String coupon) {
         boolean result = false;
         // 오늘과 쿠폰 날짜 차이 6개월 계산
-        Optional<CouponVO> getCoupon = couponDTO.findByCoupon(coupon);
-        if (getCoupon.get().getEndDate().getTime() >= new Date().getTime()
-                && getCoupon.get().getAvailable() == true) {
-            result = true;
+        CouponVO getCoupon = couponDTO.findByCoupon(coupon);
+        try {
+            if (getCoupon.getExpDate().getTime() >= new Date().getTime()
+                    && getCoupon.getAvailable() == true) {
+                result = true;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("쿠폰이 존재 하지 않습니다. 쿠폰을 생성해 주세요");
         }
 
         return result;
@@ -113,11 +123,47 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      */
     public void useCoupon(String coupon) {
-        Optional<CouponVO> couponVO = couponDTO.findByCoupon(coupon.toUpperCase());
-        System.out.println(couponVO.get().getCoupon());
+        CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase());
+        System.out.println(couponVO.getCoupon());
 
-        couponVO.get().setAvailable(false);
+        couponVO.setAvailable(false);
         couponDTO.modifyByCoupon(couponVO);
     }
 
+    /**
+     * 생성된 쿠폰 리스트 전체 Csv파일로 조저
+     */
+    public void wirteCsvToCoupon() {
+
+        File mkdirs = new File("./static/output/coupon");
+        mkdirs.mkdirs();
+
+        String fileName = "coupon";
+        String fileExt = ".csv";
+
+        BufferedWriter bw = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        try {
+            bw = new BufferedWriter(
+                    new FileWriter(mkdirs + "/" + new Date().getTime() + fileName + fileExt, Charset.forName("UTF-8")));
+            bw.write('\ufeff'); // 엑셀 한글 깨짐 대비 해결
+            bw.write("쿠폰번호,유효기간,사용가능");
+            bw.newLine();
+            for (CouponVO c : couponDTO.findAllByCoupon()) {
+                System.out.println(c);
+                bw.write(c.getCoupon() + "," + sdf.format(c.getExpDate()) + "," + (c.getAvailable() ? "가능" : "불가능"));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

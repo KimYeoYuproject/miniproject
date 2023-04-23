@@ -4,26 +4,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-
 import Model.CouponVO;
 
 public class CouponDTO {
 
-    private List<CouponVO> coupons = new ArrayList<>();
+    List<CouponVO> coupons = new ArrayList<>();
 
-    public Optional<CouponVO> findByCoupon(String coupon) {
+    public CouponVO findByCoupon(String coupon) {
         for (CouponVO c : coupons) {
             if (c.getCoupon().equals(coupon.toUpperCase())) {
-                return Optional.of(c);
+                return c;
             }
         }
         return null;
-
     }
 
-    public Optional<List<CouponVO>> findAllByCoupon() {
-        return Optional.of(coupons);
+    public List<CouponVO> findAllByCoupon() {
+        return coupons;
     }
 
     public void saveByCoupon(String couponString) {
@@ -45,12 +42,12 @@ public class CouponDTO {
         return isExist;
     }
 
-    public void modifyByCoupon(Optional<CouponVO> couponVO) {
+    public void modifyByCoupon(CouponVO couponVO) {
         for (int i = 0; i < coupons.size(); i++) {
-            if (coupons.get(i).getCoupon() == couponVO.get().getCoupon()) {
-                coupons.get(i).setCoupon(couponVO.get().getCoupon());
-                coupons.get(i).setEndDate(couponVO.get().getEndDate());
-                coupons.get(i).setAvailable(couponVO.get().getAvailable());
+            if (coupons.get(i).getCoupon() == couponVO.getCoupon()) {
+                coupons.get(i).setCoupon(couponVO.getCoupon());
+                coupons.get(i).setExpDate(couponVO.getExpDate());
+                coupons.get(i).setAvailable(couponVO.getAvailable());
             }
         }
     }

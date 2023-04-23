@@ -1,6 +1,8 @@
 package View;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ import Controller.MenuController;
 import Model.MenuVO;
 
 public class CoffeMenuView {
+
     private MenuController menuController;
 
     private Scanner sc = new Scanner(System.in);
@@ -43,7 +46,7 @@ public class CoffeMenuView {
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
         System.out.println(name);
-        MenuVO menuVO = menuController.findByMenu(name).get();
+        MenuVO menuVO = menuController.findByMenu(name);
         if (menuVO != null) {
             System.out.println(menuVO);
         } else {
@@ -53,7 +56,7 @@ public class CoffeMenuView {
 
     public void findAllByMenu() {
         try {
-            for (MenuVO m : menuController.findAllByMenu().get()) {
+            for (MenuVO m : menuController.findAllByMenu()) {
                 System.out.println(m);
             }
         } catch (NullPointerException e) {
@@ -73,35 +76,39 @@ public class CoffeMenuView {
     }
 
     public void findAllCategory() {
-        for (String s : menuController.findAllCategory().get()) {
+        for (String s : menuController.findAllCategory()) {
             System.out.println(s);
         }
-        System.out.println(menuController.findAllCategory().get());
     }
 
     public void modifyByMenu() {
-        List<MenuVO> menuList = menuController.findAllByMenu().get();
+        List<MenuVO> menuList = menuController.findAllByMenu();
         int number = 0;
         for (int i = 0; i < menuList.size(); i++) {
             System.out.printf("%2d %s\n", i, menuList.get(i));
         }
-        System.out.print("수정하고자 하는 메뉴의 번호를 입력하세요 : ");
-        number = sc.nextInt();
-        sc.nextLine();
+        while (true) {
+            try {
+                System.out.print("수정하고자 하는 메뉴의 번호를 입력하세요 : ");
+                number = sc.nextInt();
+                sc.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("숫자만 입력해야합니다. 다시 입력해주세요 : ");
+            }
+        }
 
         String name = null;
         String category = null;
         int price = 0;
 
-        System.out.println("변경이 없으면 공란 엔터");
-
         System.out.printf("메뉴 이름(변경 없으면 공란) (%s) : ", menuList.get(number).getName());
         name = sc.nextLine();
-        menuList.get(number).setName(name == null ? menuList.get(number).getName() : name);
+        menuList.get(number).setName(name == "" ? menuList.get(number).getName() : name);
 
         System.out.printf("메뉴 카테고리(변경 없으면 공란) (%s) : ", menuList.get(number).getCategory());
         category = sc.nextLine();
-        menuList.get(number).setCategory(category == null ? menuList.get(number).getCategory() : category);
+        menuList.get(number).setCategory(category == "" ? menuList.get(number).getCategory() : category);
 
         System.out.printf("메뉴 이름(수정 없으면 0입력) (%s) : ", menuList.get(number).getPrice());
         price = sc.nextInt();
