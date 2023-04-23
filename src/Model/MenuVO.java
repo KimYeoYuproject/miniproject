@@ -1,11 +1,9 @@
 package Model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MenuVO {
-
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-d HH:MM:ss");
 
     private String name;
 
@@ -13,18 +11,18 @@ public class MenuVO {
 
     private int price;
 
-    private Date createDate;
+    private LocalDateTime createDate;
 
     @Override
     public String toString() {
         return "메뉴명 : " + name + ", 카테고리 : " + category + ", 가격 :" + price + ", 생성시간 : "
-                + simpleDateFormat.format(createDate);
+                + createDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
     public MenuVO() {
     }
 
-    public MenuVO(String name, String category, int price, Date createDate) {
+    public MenuVO(String name, String category, int price, LocalDateTime createDate) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -55,11 +53,11 @@ public class MenuVO {
         this.price = price;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 

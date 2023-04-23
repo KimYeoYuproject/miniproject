@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -46,7 +47,9 @@ public class CouponController {
      */
     public void couponGenerate(int number, int length) {
         for (int i = 0; i < number; i++) {
+            ;
             String newCoupon = randomCouponGenerator(length);
+            System.out.println(newCoupon);
             if (existCoupon(newCoupon) == false) {
                 couponDTO.saveByCoupon(newCoupon);
             } else {
@@ -62,7 +65,7 @@ public class CouponController {
      * @return
      */
     public boolean existCoupon(String coupon) {
-        return couponDTO.findByCoupon(coupon.toUpperCase()) != null ? true : false;
+        return couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null) != null ? true : false;
     }
 
     /**
@@ -105,7 +108,7 @@ public class CouponController {
         // 오늘과 쿠폰 날짜 차이 6개월 계산
         CouponVO getCoupon = couponDTO.findByCoupon(coupon).orElse(null);
         try {
-            if (getCoupon.getExpDate().getTime() >= new Date().getTime()
+            if (getCoupon.getExpDate().isAfter(LocalDateTime.now())
                     && getCoupon.getAvailable() == true) {
                 result = true;
             }

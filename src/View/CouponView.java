@@ -1,6 +1,7 @@
 package View;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class CouponView {
             System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n",
                     count++,
                     c.getCoupon(),
-                    new SimpleDateFormat("YYYY-MM-dd").format(c.getExpDate()),
+                    c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),
                     c.getAvailable());
         }
     }

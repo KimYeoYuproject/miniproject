@@ -1,16 +1,19 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class CouponVO {
 
     private String coupon;
 
-    private Date expDate;
+    private LocalDateTime expDate;
 
     private boolean available = true;
 
-    public CouponVO(String coupon, Date expDate, boolean available) {
+    public CouponVO(String coupon, LocalDateTime expDate, boolean available) {
         this.coupon = coupon;
         this.expDate = expDate;
         this.available = available;
@@ -21,7 +24,9 @@ public class CouponVO {
 
     @Override
     public String toString() {
-        return "Coupon [coupon=" + coupon + ", expDate=" + expDate + ", vailable=" + available + "]";
+        return "Coupon [coupon=" + coupon
+                + ", expDate=" + expDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
+                + ", vailable=" + available + "]";
     }
 
     public String getCoupon() {
@@ -32,11 +37,11 @@ public class CouponVO {
         this.coupon = coupon;
     }
 
-    public Date getExpDate() {
+    public LocalDateTime getExpDate() {
         return expDate;
     }
 
-    public void setExpDate(Date expDate) {
+    public void setExpDate(LocalDateTime expDate) {
         this.expDate = expDate;
     }
 

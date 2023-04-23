@@ -1,7 +1,7 @@
 package View;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +32,7 @@ public class CoffeMenuView {
         price = sc.nextInt();
         sc.nextLine();
 
-        boolean result = menuController.saveByMenu(new MenuVO(name, category, price, new Date()));
+        boolean result = menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()));
 
         if (result) {
             System.out.println("메뉴 생성 성공");

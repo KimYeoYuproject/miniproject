@@ -1,8 +1,7 @@
 package DTO;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,10 +23,7 @@ public class CouponDTO {
 
     public void saveByCoupon(String couponString) {
         String coupon = couponString;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.MONTH, 6);
-        coupons.add(new CouponVO(coupon, cal.getTime(), true));
+        coupons.add(new CouponVO(coupon, LocalDateTime.now().plusMonths(6), true));
     }
 
     public boolean deleteByCoupon(String coupon) {
