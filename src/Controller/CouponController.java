@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -142,16 +142,19 @@ public class CouponController {
         String fileExt = ".csv";
 
         BufferedWriter bw = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
         try {
             bw = new BufferedWriter(
                     new FileWriter(mkdirs + "/" + new Date().getTime() + fileName + fileExt, Charset.forName("UTF-8")));
+
             bw.write('\ufeff'); // 엑셀 한글 깨짐 대비 해결
             bw.write("쿠폰번호,유효기간,사용가능");
             bw.newLine();
+
             for (CouponVO c : couponDTO.findAllByCoupon()) {
-                System.out.println(c);
-                bw.write(c.getCoupon() + "," + sdf.format(c.getExpDate()) + "," + (c.getAvailable() ? "가능" : "불가능"));
+
+                bw.write(c.getCoupon() +
+                        "," + c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
+                        + "," + (c.getAvailable() ? "가능" : "불가능"));
                 bw.newLine();
             }
         } catch (IOException e) {

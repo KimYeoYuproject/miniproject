@@ -1,6 +1,5 @@
 package View;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
