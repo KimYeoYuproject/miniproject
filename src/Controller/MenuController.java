@@ -17,8 +17,8 @@ public class MenuController {
      * @return
      */
     public boolean saveByMenu(MenuVO menu) {
-        if (menuDTO.findByMenu(menu.getName()) == null) {
-            menuDTO.saveByMenu(menu);
+        if (this.menuDTO.findByMenu(menu.getName()) == null) {
+            this.menuDTO.saveByMenu(menu);
             return true;
         }
         return false;
@@ -33,7 +33,7 @@ public class MenuController {
     public boolean modifyByMenu(MenuVO menu) {
         MenuVO menuVO = findByMenu(menu.getName());
         if (menuVO != null) {
-            return menuDTO.modifyByMenu(menuVO);
+            return this.menuDTO.modifyByMenu(menuVO);
         }
         return false;
     }
@@ -45,7 +45,7 @@ public class MenuController {
      * @return
      */
     public MenuVO findByMenu(String menuName) {
-        return menuDTO.findByMenu(menuName);
+        return this.menuDTO.findByMenu(menuName);
     }
 
     /**
@@ -54,7 +54,7 @@ public class MenuController {
      * @return
      */
     public List<MenuVO> findAllByMenu() {
-        return menuDTO.findAllByMenu();
+        return this.menuDTO.findAllByMenu();
     }
 
     /**
@@ -80,7 +80,7 @@ public class MenuController {
         if (findByMenu(menuName) == null) {
             return false;
         }
-        return menuDTO.deleteByMenu(menuName);
+        return this.menuDTO.deleteByMenu(menuName);
     }
 
     /**
@@ -89,7 +89,7 @@ public class MenuController {
      * @return
      */
     public boolean deleteAllBymenu() {
-        return menuDTO.deleteAllBymenu();
+        return this.menuDTO.deleteAllBymenu();
     }
 
     /**
@@ -98,7 +98,7 @@ public class MenuController {
      * @return
      */
     public Set<String> findAllCategory() {
-        return menuDTO.findAllCategory();
+        return this.menuDTO.findAllCategory();
     }
 
 }

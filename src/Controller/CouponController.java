@@ -51,7 +51,7 @@ public class CouponController {
             String newCoupon = randomCouponGenerator(length);
             System.out.println(newCoupon);
             if (existCoupon(newCoupon) == false) {
-                couponDTO.saveByCoupon(newCoupon);
+                this.couponDTO.saveByCoupon(newCoupon);
             } else {
                 number--;
             }
@@ -65,7 +65,7 @@ public class CouponController {
      * @return
      */
     public boolean existCoupon(String coupon) {
-        return couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null) != null ? true : false;
+        return this.couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null) != null ? true : false;
     }
 
     /**
@@ -75,7 +75,7 @@ public class CouponController {
      * @return
      */
     public CouponVO findByCoupon(String coupon) {
-        return couponDTO.findByCoupon(coupon).orElse(null);
+        return this.couponDTO.findByCoupon(coupon).orElse(null);
     }
 
     /**
@@ -84,7 +84,7 @@ public class CouponController {
      * @return
      */
     public List<CouponVO> findAllByCounpon() {
-        return couponDTO.findAllByCoupon();
+        return this.couponDTO.findAllByCoupon();
     }
 
     /**
@@ -94,7 +94,7 @@ public class CouponController {
      * @return
      */
     public boolean deleteCoupon(String coupon) {
-        return couponDTO.deleteByCoupon(coupon.toUpperCase());
+        return this.couponDTO.deleteByCoupon(coupon.toUpperCase());
     }
 
     /**
@@ -106,7 +106,7 @@ public class CouponController {
     public boolean availableCoupon(String coupon) {
         boolean result = false;
         // 오늘과 쿠폰 날짜 차이 6개월 계산
-        CouponVO getCoupon = couponDTO.findByCoupon(coupon).orElse(null);
+        CouponVO getCoupon = this.couponDTO.findByCoupon(coupon).orElse(null);
         try {
             if (getCoupon.getExpDate().isAfter(LocalDateTime.now())
                     && getCoupon.getAvailable() == true) {
@@ -127,7 +127,7 @@ public class CouponController {
     public void useCoupon(String coupon) {
         CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null);
         couponVO.setAvailable(false);
-        couponDTO.modifyByCoupon(couponVO);
+        this.couponDTO.modifyByCoupon(couponVO);
     }
 
     /**
@@ -150,7 +150,7 @@ public class CouponController {
             bw.write("쿠폰번호,유효기간,사용가능");
             bw.newLine();
 
-            for (CouponVO c : couponDTO.findAllByCoupon()) {
+            for (CouponVO c : this.couponDTO.findAllByCoupon()) {
 
                 bw.write(c.getCoupon() +
                         "," + c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))

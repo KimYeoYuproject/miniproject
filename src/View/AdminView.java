@@ -36,12 +36,12 @@ public class AdminView {
 
             switch (number) {
                 case 1:
-                    new CoffeMenuView(menuController).coffeMenu();
+                    new CoffeMenuView(this.menuController).coffeMenu();
                     break;
                 case 2:
                     break;
                 case 3:
-                    new CouponView(couponController).couponView();
+                    new CouponView(this.couponController).couponView();
                     break;
                 case 4:
                     break;

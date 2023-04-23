@@ -32,7 +32,7 @@ public class CoffeMenuView {
         price = sc.nextInt();
         sc.nextLine();
 
-        boolean result = menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()));
+        boolean result = this.menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()));
 
         if (result) {
             System.out.println("메뉴 생성 성공");
@@ -47,7 +47,7 @@ public class CoffeMenuView {
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
         System.out.println(name);
-        MenuVO menuVO = menuController.findByMenu(name);
+        MenuVO menuVO = this.menuController.findByMenu(name);
         if (menuVO != null) {
             System.out.println(menuVO);
         } else {
@@ -58,7 +58,7 @@ public class CoffeMenuView {
     public void findAllByMenu() {
         ClearConsole.clear();
         try {
-            menuController.findAllByMenu().forEach(System.out::println);
+            this.menuController.findAllByMenu().forEach(System.out::println);
         } catch (NullPointerException e) {
             System.out.println("메뉴가 없습니다.");
         }
@@ -69,7 +69,7 @@ public class CoffeMenuView {
         String name;
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
-        if (menuController.deleteBymenu(name)) {
+        if (this.menuController.deleteBymenu(name)) {
             System.out.println(name + "을(를) 삭제 했습니다.");
         } else {
             System.out.println("해당 메뉴를 찾을 수 없습니다.");
@@ -78,14 +78,14 @@ public class CoffeMenuView {
 
     public void findAllCategory() {
         ClearConsole.clear();
-        for (String s : menuController.findAllCategory()) {
+        for (String s : this.menuController.findAllCategory()) {
             System.out.println(s);
         }
     }
 
     public void modifyByMenu() {
         ClearConsole.clear();
-        List<MenuVO> menuList = menuController.findAllByMenu();
+        List<MenuVO> menuList = this.menuController.findAllByMenu();
         int number = 0;
         for (int i = 0; i < menuList.size(); i++) {
             System.out.printf("%2d %s\n", i, menuList.get(i));
@@ -118,14 +118,14 @@ public class CoffeMenuView {
         sc.nextLine();
         menuList.get(number).setPrice(price == 0 ? menuList.get(number).getPrice() : price);
 
-        menuController.modifyByMenu(menuList.get(number));
+        this.menuController.modifyByMenu(menuList.get(number));
 
     }
 
     public void categoryFindAllbyMenu() {
         ClearConsole.clear();
         int number = 0;
-        List<String> categoryList = new ArrayList<>(menuController.findAllCategory());
+        List<String> categoryList = new ArrayList<>(this.menuController.findAllCategory());
         for (int i = 0; i < categoryList.size(); i++) {
             System.out.println(i + ". " + categoryList.get(i));
         }
@@ -134,7 +134,7 @@ public class CoffeMenuView {
         sc.nextLine();
 
         List<MenuVO> menuList = new ArrayList<>();
-        menuList = menuController.categoryFindAllbyMenu(categoryList.get(number));
+        menuList = this.menuController.categoryFindAllbyMenu(categoryList.get(number));
 
         menuList.forEach(System.out::println);
 
