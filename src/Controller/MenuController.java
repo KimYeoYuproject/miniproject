@@ -1,7 +1,6 @@
 package Controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import DTO.MenuDTO;
@@ -56,6 +55,19 @@ public class MenuController {
      */
     public List<MenuVO> findAllByMenu() {
         return menuDTO.findAllByMenu();
+    }
+
+    /**
+     * 카테고리별 메뉴 검색
+     * 
+     * @param category 출력할 카테고리
+     * @return
+     */
+    public List<MenuVO> categoryFindAllbyMenu(String category) {
+        return menuDTO.findAllByMenu()
+                .stream()
+                .filter(menuVO -> menuVO.getCategory().equals(category))
+                .toList();
     }
 
     /**

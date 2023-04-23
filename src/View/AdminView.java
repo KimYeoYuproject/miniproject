@@ -20,8 +20,9 @@ public class AdminView {
     }
 
     public void adminView() throws IOException {
-        ClearConsole.clear();
+
         label: while (true) {
+            ClearConsole.clear();
             System.out.println("======= 관리자 메뉴 ========");
             System.out.println("1. 주문 관리");
             System.out.println("2. 계정 관리");

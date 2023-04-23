@@ -8,7 +8,6 @@ import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import DTO.CouponDTO;
@@ -73,7 +72,7 @@ public class CouponController {
      * @return
      */
     public CouponVO findByCoupon(String coupon) {
-        return couponDTO.findByCoupon(coupon);
+        return couponDTO.findByCoupon(coupon).orElse(null);
     }
 
     /**
@@ -104,7 +103,7 @@ public class CouponController {
     public boolean availableCoupon(String coupon) {
         boolean result = false;
         // 오늘과 쿠폰 날짜 차이 6개월 계산
-        CouponVO getCoupon = couponDTO.findByCoupon(coupon);
+        CouponVO getCoupon = couponDTO.findByCoupon(coupon).orElse(null);
         try {
             if (getCoupon.getExpDate().getTime() >= new Date().getTime()
                     && getCoupon.getAvailable() == true) {
@@ -123,9 +122,7 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      */
     public void useCoupon(String coupon) {
-        CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase());
-        System.out.println(couponVO.getCoupon());
-
+        CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null);
         couponVO.setAvailable(false);
         couponDTO.modifyByCoupon(couponVO);
     }

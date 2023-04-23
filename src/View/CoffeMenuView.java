@@ -20,7 +20,7 @@ public class CoffeMenuView {
     }
 
     public void addMenu() {
-
+        ClearConsole.clear();
         String name = null;
         String category = null;
         int price = 0;
@@ -42,6 +42,7 @@ public class CoffeMenuView {
     }
 
     public void findByMenu() {
+        ClearConsole.clear();
         String name = null;
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
@@ -55,16 +56,16 @@ public class CoffeMenuView {
     }
 
     public void findAllByMenu() {
+        ClearConsole.clear();
         try {
-            for (MenuVO m : menuController.findAllByMenu()) {
-                System.out.println(m);
-            }
+            menuController.findAllByMenu().forEach(System.out::println);
         } catch (NullPointerException e) {
             System.out.println("메뉴가 없습니다.");
         }
     }
 
     public void deleteByMenu() {
+        ClearConsole.clear();
         String name;
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
@@ -76,12 +77,14 @@ public class CoffeMenuView {
     }
 
     public void findAllCategory() {
+        ClearConsole.clear();
         for (String s : menuController.findAllCategory()) {
             System.out.println(s);
         }
     }
 
     public void modifyByMenu() {
+        ClearConsole.clear();
         List<MenuVO> menuList = menuController.findAllByMenu();
         int number = 0;
         for (int i = 0; i < menuList.size(); i++) {
@@ -119,16 +122,35 @@ public class CoffeMenuView {
 
     }
 
-    public void coffeMenu() {
+    public void categoryFindAllbyMenu() {
         ClearConsole.clear();
         int number = 0;
+        List<String> categoryList = new ArrayList<>(menuController.findAllCategory());
+        for (int i = 0; i < categoryList.size(); i++) {
+            System.out.println(i + ". " + categoryList.get(i));
+        }
+        System.out.print("검색할 카테고리 번호를 입력하세요 : ");
+        number = sc.nextInt();
+        sc.nextLine();
+
+        List<MenuVO> menuList = new ArrayList<>();
+        menuList = menuController.categoryFindAllbyMenu(categoryList.get(number));
+
+        menuList.forEach(System.out::println);
+
+    }
+
+    public void coffeMenu() {
+        int number = 0;
         label: while (true) {
+            ClearConsole.clear();
             System.out.println("1. 메뉴 추가 ");
             System.out.println("2. 메뉴 조회");
             System.out.println("3. 메뉴 전체 조회");
             System.out.println("4. 메뉴 수정");
             System.out.println("5. 메뉴 삭제");
             System.out.println("6. 메뉴 카테고리 조회");
+            System.out.println("7. 카테고리별 메뉴 조회");
             System.out.println("9. 종료 ");
             System.out.println();
             System.out.print("사용할 메뉴 선택 : ");
@@ -153,12 +175,17 @@ public class CoffeMenuView {
                 case 6:
                     findAllCategory();
                     break;
+                case 7:
+                    categoryFindAllbyMenu();
+                    break;
                 case 9:
                     break label;
                 default:
                     System.out.println("없는 메뉴 입니다.");
                     break;
+
             }
+
         }
     }
 }

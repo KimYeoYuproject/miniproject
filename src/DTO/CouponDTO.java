@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import Model.CouponVO;
 
 public class CouponDTO {
 
     List<CouponVO> coupons = new ArrayList<>();
 
-    public CouponVO findByCoupon(String coupon) {
-        for (CouponVO c : coupons) {
-            if (c.getCoupon().equals(coupon.toUpperCase())) {
-                return c;
-            }
-        }
-        return null;
+    public Optional<CouponVO> findByCoupon(String coupon) {
+        return coupons.stream()
+                .filter(c -> c.getCoupon().equals(coupon.toUpperCase())).findFirst();
+
     }
 
     public List<CouponVO> findAllByCoupon() {

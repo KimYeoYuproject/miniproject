@@ -16,6 +16,7 @@ public class CouponView {
     }
 
     public void findCoupon() {
+        ClearConsole.clear();
         String findCoupon = null;
         System.out.print("찾을 쿠폰입력 : ");
         findCoupon = sc.nextLine();
@@ -28,15 +29,20 @@ public class CouponView {
     }
 
     public void printCoupon() {
+        ClearConsole.clear();
         List<CouponVO> coupons = controller.findAllByCounpon();
         int count = 0;
         for (CouponVO c : coupons) {
-            System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n", count++, c.getCoupon(),
-                    new SimpleDateFormat("YYYY-MM-dd").format(c.getExpDate()), c.getAvailable());
+            System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n",
+                    count++,
+                    c.getCoupon(),
+                    new SimpleDateFormat("YYYY-MM-dd").format(c.getExpDate()),
+                    c.getAvailable());
         }
     }
 
     public void delCoupon() {
+        ClearConsole.clear();
         String delCoupon = null;
         System.out.print("삭제할 쿠폰 입력 : ");
         delCoupon = sc.nextLine();
@@ -49,11 +55,11 @@ public class CouponView {
     }
 
     public void useCoupon() {
+        ClearConsole.clear();
         String useCoupon = null;
         System.out.print("사용할 쿠폰 선택 쿠폰 입력 : ");
         useCoupon = sc.nextLine();
         try {
-
             controller.useCoupon(useCoupon);
         } catch (NullPointerException e) {
             System.out.println("쿠폰을 찾을 수 없습니다");
@@ -65,6 +71,7 @@ public class CouponView {
     }
 
     public void availableCoupon() {
+        ClearConsole.clear();
         String useCoupon = null;
         System.out.print("사용할 쿠폰 선택 쿠폰 입력 : ");
         useCoupon = sc.nextLine();

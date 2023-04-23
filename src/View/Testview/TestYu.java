@@ -9,15 +9,17 @@ import View.AdminView;
 import View.ClearConsole;
 
 public class TestYu {
-    private CouponController controller = new CouponController();
+    private CouponController couponController = new CouponController();
     private MenuController menuController = new MenuController();
 
     private Scanner sc = new Scanner(System.in);
 
     public void view() {
         ClearConsole.clear();
+        couponController.couponGenerate(10, 20);
         int number = 0;
         label: while (true) {
+            ClearConsole.clear();
             System.out.println("테스트 메뉴 선택");
             System.out.println("1. 관리자페이지");
             System.out.println("2. 주문메뉴");
@@ -29,7 +31,7 @@ public class TestYu {
             switch (number) {
                 case 1:
                     try {
-                        new AdminView(controller, menuController).adminView();
+                        new AdminView(couponController, menuController).adminView();
                     } catch (IOException e) {
                         System.out.println("오류가 발생했습니다.");
                         e.printStackTrace();

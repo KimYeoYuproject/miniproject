@@ -14,6 +14,7 @@ public class TestView {
         ClearConsole.clear();
         int number = 0;
         label: while (true) {
+            ClearConsole.clear();
             System.out.println("테스트 담당자 선택");
             System.out.println("1. 김민지");
             System.out.println("2. 여미지");

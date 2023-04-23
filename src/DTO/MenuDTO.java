@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import Model.MenuVO;
@@ -32,7 +31,7 @@ public class MenuDTO {
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("찾는 메뉴가 없습니다.");
+            return null;
         }
         return null;
     }
