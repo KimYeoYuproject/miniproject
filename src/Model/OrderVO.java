@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
  * @author miji
  * 주문내역 정보를 담을 객체 생성
  */
-public class OderVO {
+public class OrderVO {
 	
 	private int no;					// 주문번호
-	private int oderer;				// 주문자
+	private String orderer;			// 주문자
 	private String menu;			// 메뉴
 	private int price;				// 가격
 	private LocalDateTime  date;	// 주문일자
@@ -19,18 +19,18 @@ public class OderVO {
 	// toString 생성
 	@Override
 	public String toString() {
-		return "OderVO [no=" + no + ", oderer=" + oderer + ", menu=" + menu + ", price=" + price + ", date=" + date
+		return "OderVO [no=" + no + ", odrerer=" + orderer + ", menu=" + menu + ", price=" + price + ", date=" + date
 				+ ", coupon=" + coupon + "]";
 	}
 
 	// 기본생성자
-	public OderVO() { }
+	public OrderVO() { }
 	
 	// 모든객체 초기화 가능한 생성자
-	public OderVO(int no, int oderer, String menu, int price, LocalDateTime date, boolean coupon) {
+	public OrderVO(int no, String orderer, String menu, int price, LocalDateTime date, boolean coupon) {
 		super();
 		this.no = no;
-		this.oderer = oderer;
+		this.orderer = orderer;
 		this.menu = menu;
 		this.price = price;
 		this.date = date;
@@ -47,12 +47,12 @@ public class OderVO {
 		this.no = no;
 	}
 
-	public int getOderer() {
-		return oderer;
+	public String getOrderer() {
+		return orderer;
 	}
 
-	public void setOderer(int oderer) {
-		this.oderer = oderer;
+	public void setOrderer(String oderer) {
+		this.orderer = oderer;
 	}
 
 	public String getMenu() {

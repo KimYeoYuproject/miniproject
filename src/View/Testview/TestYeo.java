@@ -2,6 +2,7 @@ package View.Testview;
 
 import java.util.Scanner;
 
+import Controller.OrderController;
 import View.ClearConsole;
 
 /**
@@ -37,6 +38,29 @@ public class TestYeo {
     	
     	
     	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+		
+		OrderController order = new OrderController();
+		
+		order.insertOrder();
+		
+		order.selectAll();
+		
+		order.selectNo();
+		
+		order.searcOrderByNo();
+		
+		System.out.println("주문번호로 검색완료");
+		
+		order.searcOrderByOrderer();
+		
+		
     	
     	
     	
