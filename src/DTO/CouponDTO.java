@@ -31,7 +31,6 @@ public class CouponDTO {
             if (this.coupons.get(i).getCoupon().equals(coupon)) {
                 this.coupons.remove(i);
                 return true;
-
             }
         }
         return false;
@@ -39,7 +38,7 @@ public class CouponDTO {
 
     public void modifyByCoupon(CouponVO couponVO) {
         for (int i = 0; i < this.coupons.size(); i++) {
-            if (this.coupons.get(i).getCoupon() == couponVO.getCoupon()) {
+            if (this.coupons.get(i).getCoupon().equals(couponVO.getCoupon())) {
                 this.coupons.get(i).setCoupon(couponVO.getCoupon());
                 this.coupons.get(i).setExpDate(couponVO.getExpDate());
                 this.coupons.get(i).setAvailable(couponVO.getAvailable());
