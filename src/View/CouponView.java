@@ -1,6 +1,7 @@
 package View;
 
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,7 +71,7 @@ public class CouponView {
         this.controller.couponGenerate(number, length);
     }
 
-    public void availableCoupon() {
+    public void availableCoupon() throws InputMismatchException {
         ClearConsole.clear();
         String useCoupon = null;
         System.out.print("사용할 쿠폰 선택 쿠폰 입력 : ");
@@ -86,7 +87,7 @@ public class CouponView {
         this.controller.wirteCsvToCoupon();
     }
 
-    public void couponView() {
+    public void couponView() throws InputMismatchException {
         int number = 0;
 
         label: while (true) {

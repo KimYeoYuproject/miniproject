@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Controller.MenuController;
+import DTO.MenuDTO;
 import Model.MenuVO;
 
 public class CoffeMenuView {
@@ -19,7 +20,7 @@ public class CoffeMenuView {
         this.menuController = menuController;
     }
 
-    public void addMenu() {
+    public void addMenu() throws InputMismatchException {
         ClearConsole.clear();
         String name = null;
         String category = null;
@@ -76,6 +77,14 @@ public class CoffeMenuView {
         }
     }
 
+    public void deleteAllbyMenu() {
+        if (menuController.deleteAllBymenu()) {
+            System.out.println("정상적으로 삭제 되었습니다.");
+        } else {
+            System.out.println("오류");
+        }
+    }
+
     public void findAllCategory() {
         ClearConsole.clear();
         for (String s : this.menuController.findAllCategory()) {
@@ -83,7 +92,7 @@ public class CoffeMenuView {
         }
     }
 
-    public void modifyByMenu() {
+    public void modifyByMenu() throws InputMismatchException {
         ClearConsole.clear();
         List<MenuVO> menuList = this.menuController.findAllByMenu();
         int number = 0;
@@ -122,7 +131,7 @@ public class CoffeMenuView {
 
     }
 
-    public void categoryFindAllbyMenu() {
+    public void categoryFindAllbyMenu() throws InputMismatchException {
         ClearConsole.clear();
         int number = 0;
         List<String> categoryList = new ArrayList<>(this.menuController.findAllCategory());
@@ -140,7 +149,7 @@ public class CoffeMenuView {
 
     }
 
-    public void coffeMenu() {
+    public void coffeMenu() throws InputMismatchException {
         int number = 0;
         label: while (true) {
             ClearConsole.clear();
@@ -149,8 +158,9 @@ public class CoffeMenuView {
             System.out.println("3. 메뉴 전체 조회");
             System.out.println("4. 메뉴 수정");
             System.out.println("5. 메뉴 삭제");
-            System.out.println("6. 메뉴 카테고리 조회");
-            System.out.println("7. 카테고리별 메뉴 조회");
+            System.out.println("6. 메뉴 모두 삭제");
+            System.out.println("7. 메뉴 카테고리 조회");
+            System.out.println("8. 카테고리별 메뉴 조회");
             System.out.println("9. 종료 ");
             System.out.println();
             System.out.print("사용할 메뉴 선택 : ");
@@ -173,9 +183,12 @@ public class CoffeMenuView {
                     deleteByMenu();
                     break;
                 case 6:
-                    findAllCategory();
+                    deleteAllbyMenu();
                     break;
                 case 7:
+                    findAllCategory();
+                    break;
+                case 8:
                     categoryFindAllbyMenu();
                     break;
                 case 9:
