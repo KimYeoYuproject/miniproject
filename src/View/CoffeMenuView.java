@@ -21,15 +21,20 @@ public class CoffeMenuView {
 
     public void addMenu() throws InputMismatchException {
         ClearConsole.clear();
+
         String name = null;
         String category = null;
         int price = 0;
+
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
+
         System.out.print("메뉴 카테고리 : ");
         category = sc.nextLine();
+
         System.out.print("메뉴 가격 : ");
         price = sc.nextInt();
+
         sc.nextLine();
 
         boolean result = this.menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()));
@@ -43,11 +48,15 @@ public class CoffeMenuView {
 
     public void findByMenu() {
         ClearConsole.clear();
+
         String name = null;
+
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
         System.out.println(name);
+
         MenuVO menuVO = this.menuController.findByMenu(name);
+
         if (menuVO != null) {
             System.out.println(menuVO);
         } else {
@@ -57,6 +66,7 @@ public class CoffeMenuView {
 
     public void findAllByMenu() {
         ClearConsole.clear();
+
         try {
             this.menuController.findAllByMenu().forEach(System.out::println);
         } catch (NullPointerException e) {
@@ -66,9 +76,12 @@ public class CoffeMenuView {
 
     public void deleteByMenu() {
         ClearConsole.clear();
+
         String name;
+
         System.out.print("메뉴 이름 : ");
         name = sc.nextLine();
+
         if (this.menuController.deleteBymenu(name)) {
             System.out.println(name + "을(를) 삭제 했습니다.");
         } else {
@@ -86,6 +99,7 @@ public class CoffeMenuView {
 
     public void findAllCategory() {
         ClearConsole.clear();
+
         for (String s : this.menuController.findAllCategory()) {
             System.out.println(s);
         }
@@ -93,8 +107,11 @@ public class CoffeMenuView {
 
     public void modifyByMenu() throws InputMismatchException {
         ClearConsole.clear();
+
         List<MenuVO> menuList = this.menuController.findAllByMenu();
+
         int number = 0;
+
         for (int i = 0; i < menuList.size(); i++) {
             System.out.printf("%2d %s\n", i, menuList.get(i));
         }
@@ -127,7 +144,6 @@ public class CoffeMenuView {
         menuList.get(number).setPrice(price == 0 ? menuList.get(number).getPrice() : price);
 
         this.menuController.modifyByMenu(menuList.get(number));
-
     }
 
     public void categoryFindAllbyMenu() throws InputMismatchException {

@@ -46,7 +46,7 @@ public class CouponController {
      */
     public void couponGenerate(int number, int length) {
         for (int i = 0; i < number; i++) {
-            ;
+
             String newCoupon = randomCouponGenerator(length);
             System.out.println(newCoupon);
             if (existCoupon(newCoupon) == false) {
@@ -64,7 +64,8 @@ public class CouponController {
      * @return
      */
     public boolean existCoupon(String coupon) {
-        return this.couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null) != null ? true : false;
+        return this.couponDTO.findByCoupon(
+                coupon.toUpperCase()).orElse(null) != null ? true : false;
     }
 
     /**
@@ -74,7 +75,8 @@ public class CouponController {
      * @return
      */
     public CouponVO findByCoupon(String coupon) {
-        return this.couponDTO.findByCoupon(coupon).orElse(null);
+        return this.couponDTO.findByCoupon(coupon)
+                .orElse(null);
     }
 
     /**
@@ -139,18 +141,21 @@ public class CouponController {
 
         String fileName = "coupon";
         String fileExt = ".csv";
-        String prefixFileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMddHHmmssn"));
+        String prefixFileName = LocalDateTime.now()
+                .format(DateTimeFormatter
+                        .ofPattern("uuuuMMddHHmmssn"));
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(
-                    new FileWriter(mkdirs + "/" + prefixFileName + fileName + fileExt, Charset.forName("UTF-8")));
+                    new FileWriter(mkdirs + "/"
+                            + prefixFileName + fileName + fileExt,
+                            Charset.forName("UTF-8")));
 
             bw.write('\ufeff'); // 엑셀 한글 깨짐 대비 해결
             bw.write("쿠폰번호,유효기간,사용가능");
             bw.newLine();
 
             for (CouponVO c : this.couponDTO.findAllByCoupon()) {
-
                 bw.write(c.getCoupon() +
                         "," + c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
                         + "," + (c.getAvailable() ? "가능" : "불가능"));

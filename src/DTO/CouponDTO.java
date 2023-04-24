@@ -13,7 +13,8 @@ public class CouponDTO {
 
     public Optional<CouponVO> findByCoupon(String coupon) {
         return this.coupons.stream()
-                .filter(c -> c.getCoupon().equals(coupon.toUpperCase())).findFirst();
+                .filter(c -> c.getCoupon().equals(coupon.toUpperCase()))
+                .findFirst();
 
     }
 
@@ -23,7 +24,9 @@ public class CouponDTO {
 
     public void saveByCoupon(String couponString) {
         String coupon = couponString;
-        this.coupons.add(new CouponVO(coupon, LocalDateTime.now().plusMonths(6), true));
+        this.coupons.add(
+                new CouponVO(coupon, LocalDateTime.now()
+                        .plusMonths(6), true));
     }
 
     public boolean deleteByCoupon(String coupon) {
