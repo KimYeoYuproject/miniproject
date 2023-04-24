@@ -99,13 +99,13 @@ public class CouponController {
 
     /**
      * 쿠폰 사용 가능 여부 확인
+     * 쿠폰 유효기간 기본 6개월 유효기간 = 오늘 까지 이용가능, 사용가능 여부도 체크
      * 
      * @param coupon 쿠폰 번호
      * @return
      */
     public boolean availableCoupon(String coupon) {
         boolean result = false;
-        // 오늘과 쿠폰 날짜 차이 6개월 계산
         CouponVO getCoupon = this.couponDTO.findByCoupon(coupon).orElse(null);
         try {
             if (getCoupon.getExpDate().isAfter(LocalDateTime.now())
@@ -140,11 +140,11 @@ public class CouponController {
 
         String fileName = "coupon";
         String fileExt = ".csv";
-
+        String prefixFileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMddHHmmssn"));
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(
-                    new FileWriter(mkdirs + "/" + new Date().getTime() + fileName + fileExt, Charset.forName("UTF-8")));
+                    new FileWriter(mkdirs + "/" + prefixFileName + fileName + fileExt, Charset.forName("UTF-8")));
 
             bw.write('\ufeff'); // 엑셀 한글 깨짐 대비 해결
             bw.write("쿠폰번호,유효기간,사용가능");

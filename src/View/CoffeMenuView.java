@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import Controller.MenuController;
-import DTO.MenuDTO;
 import Model.MenuVO;
 
 public class CoffeMenuView {
@@ -81,7 +80,7 @@ public class CoffeMenuView {
         if (menuController.deleteAllBymenu()) {
             System.out.println("정상적으로 삭제 되었습니다.");
         } else {
-            System.out.println("오류");
+            System.out.println("삭제할 메뉴가 없습니다.");
         }
     }
 
@@ -114,15 +113,15 @@ public class CoffeMenuView {
         String category = null;
         int price = 0;
 
-        System.out.printf("메뉴 이름(변경 없으면 공란) (%s) : ", menuList.get(number).getName());
+        System.out.printf("메뉴 이름(변경 없으면 공란 엔터) (현재값 : %s) : ", menuList.get(number).getName());
         name = sc.nextLine();
         menuList.get(number).setName(name == "" ? menuList.get(number).getName() : name);
 
-        System.out.printf("메뉴 카테고리(변경 없으면 공란) (%s) : ", menuList.get(number).getCategory());
+        System.out.printf("메뉴 카테고리(변경 없으면 공란 엔터) (현재값 : %s) : ", menuList.get(number).getCategory());
         category = sc.nextLine();
         menuList.get(number).setCategory(category == "" ? menuList.get(number).getCategory() : category);
 
-        System.out.printf("메뉴 이름(수정 없으면 0입력) (%s) : ", menuList.get(number).getPrice());
+        System.out.printf("메뉴 이름(수정 없으면 0 입력 후 엔터) (현재값 : %s) : ", menuList.get(number).getPrice());
         price = sc.nextInt();
         sc.nextLine();
         menuList.get(number).setPrice(price == 0 ? menuList.get(number).getPrice() : price);
