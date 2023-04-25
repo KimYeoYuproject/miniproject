@@ -2,6 +2,7 @@ package DTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class CouponDTO {
     }
 
     public List<CouponVO> findAllByCoupon() {
+        this.coupons.sort(Comparator.comparing(CouponVO::getExpDate));
         return this.coupons;
     }
 

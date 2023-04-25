@@ -2,6 +2,7 @@ package DTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,7 @@ public class MenuDTO {
     }
 
     public List<MenuVO> findAllByMenu() {
+        this.menuVO.sort(Comparator.comparing(MenuVO::getName));
         return this.menuVO;
     }
 
@@ -60,7 +62,6 @@ public class MenuDTO {
     }
 
     public boolean deleteByMenu(String menuName) {
-
         for (int i = 0; i < menuVO.size(); i++) {
             if (this.menuVO.get(i).getName().equals(menuName)) {
                 this.menuVO.remove(i);
