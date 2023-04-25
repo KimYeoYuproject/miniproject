@@ -6,18 +6,22 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
+import Controller.OrderController;
 
 public class AdminView {
 
     private CouponController couponController;
     private MenuController menuController;
+    private OrderController orderController;
 
     private Scanner sc = new Scanner(System.in);
     private int number;
 
-    public AdminView(CouponController couponController, MenuController menuController) {
+    public AdminView(CouponController couponController, MenuController menuController,
+            OrderController orderController) {
         this.couponController = couponController;
         this.menuController = menuController;
+        this.orderController = orderController;
     }
 
     public void adminView() throws IOException {
@@ -45,6 +49,7 @@ public class AdminView {
                         new CouponView(this.couponController).couponView();
                         break;
                     case 4:
+                        new Orderview(this.orderController).orderView();
                         break;
                     case 9:
                         System.out.println("관리자 메뉴 종료 합니다");

@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
+import Controller.OrderController;
 import View.AdminView;
 import View.ClearConsole;
 
 public class TestYu {
     private CouponController couponController = new CouponController();
     private MenuController menuController = new MenuController();
+    private OrderController orderController = new OrderController();
 
     private Scanner sc = new Scanner(System.in);
 
@@ -31,7 +33,7 @@ public class TestYu {
             switch (number) {
                 case 1:
                     try {
-                        new AdminView(couponController, menuController).adminView();
+                        new AdminView(couponController, menuController, orderController).adminView();
                     } catch (IOException e) {
                         System.out.println("오류가 발생했습니다.");
                         e.printStackTrace();
