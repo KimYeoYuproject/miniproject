@@ -8,6 +8,9 @@ import java.util.Set;
 
 import Model.MenuVO;
 
+/**
+ * @author yoosc89
+ */
 public class MenuDTO {
     private List<MenuVO> menuVO = new ArrayList<>();
 

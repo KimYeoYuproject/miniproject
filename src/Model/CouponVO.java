@@ -3,6 +3,9 @@ package Model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author yoosc89
+ */
 public class CouponVO {
 
     private String coupon;
@@ -22,9 +25,9 @@ public class CouponVO {
 
     @Override
     public String toString() {
-        return "Coupon [coupon=" + coupon
-                + ", expDate=" + expDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
-                + ", vailable=" + available + "]";
+        return "쿠폰명 : " + coupon
+                + " | 유효기간 : " + expDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
+                + " | 사용가능 : " + available;
     }
 
     public String getCoupon() {

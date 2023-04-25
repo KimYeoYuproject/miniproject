@@ -7,6 +7,9 @@ import java.util.Optional;
 
 import Model.CouponVO;
 
+/**
+ * @author yoosc89
+ */
 public class CouponDTO {
 
     List<CouponVO> coupons = new ArrayList<>();

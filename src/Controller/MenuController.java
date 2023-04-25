@@ -6,6 +6,9 @@ import java.util.Set;
 import DTO.MenuDTO;
 import Model.MenuVO;
 
+/**
+ * @author yoosc89
+ */
 public class MenuController {
 
     private MenuDTO menuDTO = new MenuDTO();

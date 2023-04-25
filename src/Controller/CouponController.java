@@ -13,6 +13,9 @@ import java.util.Random;
 import DTO.CouponDTO;
 import Model.CouponVO;
 
+/**
+ * @author yoosc89
+ */
 public class CouponController {
 
     private Random random = new Random();

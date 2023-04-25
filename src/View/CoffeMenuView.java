@@ -9,6 +9,9 @@ import java.util.Scanner;
 import Controller.MenuController;
 import Model.MenuVO;
 
+/**
+ * @author yoosc89
+ */
 public class CoffeMenuView {
 
     private MenuController menuController;
@@ -37,9 +40,7 @@ public class CoffeMenuView {
 
         sc.nextLine();
 
-        boolean result = this.menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()));
-
-        if (result) {
+        if (this.menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()))) {
             System.out.println("메뉴 생성 성공");
         } else {
             System.out.println("같은 메뉴가 존재 합니다.");
@@ -99,10 +100,7 @@ public class CoffeMenuView {
 
     public void findAllCategory() {
         ClearConsole.clear();
-
-        for (String s : this.menuController.findAllCategory()) {
-            System.out.println(s);
-        }
+        this.menuController.findAllCategory().forEach(System.out::println);
     }
 
     public void modifyByMenu() throws InputMismatchException {

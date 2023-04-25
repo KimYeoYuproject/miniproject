@@ -3,6 +3,9 @@ package Model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author yoosc89
+ */
 public class MenuVO {
 
     private String name;

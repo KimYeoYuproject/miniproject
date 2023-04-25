@@ -1,13 +1,13 @@
 package View;
 
-import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import Controller.CouponController;
-import Model.CouponVO;
 
+/**
+ * @author yoosc89
+ */
 public class CouponView {
     private CouponController controller;
     private Scanner sc = new Scanner(System.in);
@@ -29,17 +29,20 @@ public class CouponView {
         }
     }
 
-    public void printCoupon() {
+    public void findAllCoupon() {
         ClearConsole.clear();
-        List<CouponVO> coupons = this.controller.findAllByCounpon();
-        int count = 0;
-        for (CouponVO c : coupons) {
-            System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n",
-                    count++,
-                    c.getCoupon(),
-                    c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),
-                    c.getAvailable());
-        }
+        this.controller.findAllByCounpon().forEach(System.out::println);
+        /*
+         * List<CouponVO> coupons = this.controller.findAllByCounpon();
+         * int count = 0;
+         * for (CouponVO c : coupons) {
+         * System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n",
+         * count++,
+         * c.getCoupon(),
+         * c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),
+         * c.getAvailable());
+         * }
+         */
     }
 
     public void delCoupon() {
@@ -113,7 +116,7 @@ public class CouponView {
                     findCoupon();
                     break;
                 case 3:
-                    printCoupon();
+                    findAllCoupon();
                     break;
                 case 4:
                     useCoupon();

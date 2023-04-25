@@ -8,6 +8,9 @@ import Controller.CouponController;
 import Controller.MenuController;
 import Controller.OrderController;
 
+/**
+ * @author yoosc89
+ */
 public class AdminView {
 
     private CouponController couponController;
