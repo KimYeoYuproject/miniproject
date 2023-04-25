@@ -1,6 +1,6 @@
 package Model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author miji
@@ -12,22 +12,27 @@ public class OrderVO {
 	private String orderer;			// 주문자
 	private String menu;			// 메뉴
 	private int price;				// 가격
-	private LocalDateTime  date;	// 주문일자
+	private Date  date;	// 주문일자
 	private boolean	coupon;			// 쿠폰사용여부
 	
 	
 	// toString 생성
 	@Override
 	public String toString() {
-		return "OderVO [no=" + no + ", odrerer=" + orderer + ", menu=" + menu + ", price=" + price + ", date=" + date
-				+ ", coupon=" + coupon + "]";
+		return "[주문번호 :" + no + ", 주문자: " + orderer + ", 메뉴: " + menu + ", 가격: " + price + ", 주문일자: " + date
+				+ ", 쿠폰사용: " + coupon + "]";
 	}
+	
+	public String Print() {
+		return " 메뉴: " + menu + ", 가격: " + price + ", 쿠폰사용: " + coupon ;
+	}
+	
 
 	// 기본생성자
 	public OrderVO() { }
 	
 	// 모든객체 초기화 가능한 생성자
-	public OrderVO(int no, String orderer, String menu, int price, LocalDateTime date, boolean coupon) {
+	public OrderVO(int no, String orderer, String menu, int price, Date date, boolean coupon) {
 		super();
 		this.no = no;
 		this.orderer = orderer;
@@ -71,11 +76,11 @@ public class OrderVO {
 		this.price = price;
 	}
 
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

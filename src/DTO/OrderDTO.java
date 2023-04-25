@@ -1,5 +1,8 @@
 package DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Model.OrderVO;
 
 /**
@@ -13,32 +16,27 @@ public class OrderDTO {
 	private OrderVO order = null;	// order레퍼런스 선언 및 null값으로 명시 초기화
 	
 	// 주문내역을 입력받아 배열에 저장 -- 임의로 크기 10 지정
-	OrderVO[] orderList = new OrderVO[10];
+	List<OrderVO> orderList =  new ArrayList<>();
 
 	
 	// 전달받은 order 주소값을 order레퍼런스에 대입
-	public void insertOrder (OrderVO[] order) {
-		this.orderList = order;
-	}
-	
-	// 특정주문정보 order레퍼런스 주소값 리턴
-	public OrderVO orderInfo(int i) {
-		return orderList[i];
+	public void insertOrder (OrderVO orderList2) {
+		this.orderList.add(orderList2);
 	}
 	
 	// 주문목록 전체값 리턴
-	public OrderVO[] selectAll() {
+	public List<OrderVO> selectAll() {
 		return orderList;
 	}
 	
 	// 주문번호로 서치
-	public OrderVO[] searchOrderByNo(int number) {
+	public List<OrderVO> searchOrderByNo(int number) {
 		// 검색결과를 담아줄 orderVO 객체배열 생성 -- 임의로 크기 10 지정
-		OrderVO[] orderListNo = new OrderVO[10];
+		List<OrderVO> orderListNo = new ArrayList<>();
 		int count =0;
-		for(int i =0; i<orderList.length; i++) {
-			if(orderList[i].getNo() == number) {
-				orderListNo[count] = orderList[i];
+		for(int i =0; i<orderList.size(); i++) {
+			if(orderList.get(i).getNo() == number) {
+				orderListNo.add(count, orderList.get(i));
 				count ++;
 			}
 		}		
@@ -46,13 +44,13 @@ public class OrderDTO {
 	}
 	
 	// 고객번호로 서치
-	public OrderVO[] searchOrderByOrderer(String orderer) {
+	public List<OrderVO> searchOrderByOrderer(String orderer) {
 		// 검색결과를 담아줄 orderVO 객체배열 생성 -- 임의로 크기 10 지정
-		OrderVO[] orderListOrderer = new OrderVO[10];
+		List<OrderVO> orderListOrderer = new ArrayList<>();
 		int count =0;
-		for(int i =0; i<orderList.length; i++) {
-			if(orderList[i].getOrderer().contains(orderer)) {
-				orderListOrderer[count] = orderList[i];
+		for(int i =0; i<orderList.size(); i++) {
+			if(orderList.get(i).getOrderer().contains(orderer)) {
+				orderListOrderer.add(count, orderList.get(i));
 				count ++;
 			}
 		}		
