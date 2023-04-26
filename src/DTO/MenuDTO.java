@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import Model.MenuVO;
@@ -27,17 +28,8 @@ public class MenuDTO {
         menuVO.add(new MenuVO("딸기요거트스무디", "스무디", 3900, LocalDateTime.now()));
     }
 
-    public MenuVO findByMenu(String menuName) {
-        try {
-            for (MenuVO m : this.menuVO) {
-                if (m.getName().equals(menuName)) {
-                    return m;
-                }
-            }
-        } catch (NullPointerException e) {
-            return null;
-        }
-        return null;
+    public Optional<MenuVO> findByMenu(String menuName) {
+        return this.menuVO.stream().filter(menuVO -> menuVO.equals(menuName)).findFirst();
     }
 
     public List<MenuVO> findAllByMenu() {

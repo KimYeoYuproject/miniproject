@@ -48,7 +48,7 @@ public class MenuController {
      * @return
      */
     public MenuVO findByMenu(String menuName) {
-        return this.menuDTO.findByMenu(menuName);
+        return this.menuDTO.findByMenu(menuName).orElse(null);
     }
 
     /**

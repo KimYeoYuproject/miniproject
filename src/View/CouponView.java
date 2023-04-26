@@ -22,7 +22,6 @@ public class CouponView {
         System.out.print("찾을 쿠폰입력 : ");
         findCoupon = sc.nextLine();
         try {
-
             System.out.println(this.controller.findByCoupon(findCoupon));
         } catch (NullPointerException e) {
             System.out.println("찾는 쿠폰이 없습니다");
