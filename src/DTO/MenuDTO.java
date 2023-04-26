@@ -29,7 +29,7 @@ public class MenuDTO {
     }
 
     public Optional<MenuVO> findByMenu(String menuName) {
-        return this.menuVO.stream().filter(menuVO -> menuVO.equals(menuName)).findFirst();
+        return this.menuVO.stream().filter(menuVO -> menuVO.getName().equals(menuName)).findFirst();
     }
 
     public List<MenuVO> findAllByMenu() {

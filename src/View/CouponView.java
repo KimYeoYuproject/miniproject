@@ -31,17 +31,6 @@ public class CouponView {
     public void findAllCoupon() {
         ClearConsole.clear();
         this.controller.findAllByCounpon().forEach(System.out::println);
-        /*
-         * List<CouponVO> coupons = this.controller.findAllByCounpon();
-         * int count = 0;
-         * for (CouponVO c : coupons) {
-         * System.out.printf("%2d. 쿠폰번호 : %s | 유효기간 : %s | 사용가능 : %s\n",
-         * count++,
-         * c.getCoupon(),
-         * c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),
-         * c.getAvailable());
-         * }
-         */
     }
 
     public void delCoupon() {
