@@ -1,5 +1,6 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,17 +15,25 @@ public class OrderVO {
 	private int price;				// 가격
 	private Date  date;	// 주문일자
 	private boolean	coupon;			// 쿠폰사용여부
+	SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-d");
 	
 	
 	// toString 생성
 	@Override
 	public String toString() {
-		return "[주문번호 :" + no + ", 주문자: " + orderer + ", 메뉴: " + menu + ", 가격: " + price + ", 주문일자: " + date
+		return "[주문번호 :" + no + ", 주문자: " + orderer + ", 메뉴: " + menu + ", 가격: " + price + "원" +", 주문일자: " + dt.format(date)
 				+ ", 쿠폰사용: " + coupon + "]";
 	}
 	
 	public String Print() {
-		return " 메뉴: " + menu + ", 가격: " + price + ", 쿠폰사용: " + coupon ;
+		String couponYn = null;
+		if(coupon == true) {
+			couponYn = "사용함";
+		} else {
+			couponYn = "사용안함";
+		}
+		
+		return " 메뉴: " + menu + ", 가격: " + price + "원" + ", 쿠폰사용: " + couponYn ;
 	}
 	
 

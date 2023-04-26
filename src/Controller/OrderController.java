@@ -1,5 +1,6 @@
 package Controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,23 +9,30 @@ import java.util.Scanner;
 import java.util.Date;
 
 import DTO.OrderDTO;
+import Model.MenuVO;
 import Model.OrderVO;
 
 /**
  * @author miji
- * 저장된 주문정보 데이터를 저장
+ * 저장된 주문정보 데이터를 입력받아 저장하고 금액을 출력해준다.
+ * 저장된 주문내역을 출력해준다.
  */
 public class OrderController {
+	
+	MenuController menulist = new MenuController();
+	
 	
 	OrderDTO od =  new OrderDTO();
 	Scanner sc = new Scanner(System.in);
 	java.util.Date today = new java.util.Date();
 	int no = 1;		// 주문번호는 1번부터 시작하여 새로운 주문건 마다 1씩 늘어나도록 하기
 	Date date= today;			// 주문일자를 현재시간으로 저장해줌
-	
+	// private 해주기
 	
 	// 주문정보 입력받아 배열에 저장하기
 	public void insertOrder() {
+		SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-DD");
+		dt.format(new Date());
 		
 		String orderer;
 		String menu;
@@ -51,9 +59,17 @@ public class OrderController {
 			
 		label:
 		while(true) {
-			// 사용자로부터 매뉴를 입력받음 메뉴가 여러개일경우 주문번호와 주문자가 같은 배열을 하나더 생성해야됨
+			// 사용자로부터 매뉴를 입력받음 메뉴가 여러개일경우 주문번호와 주문자가 같은 배열을 하나더 생성함
 			System.out.print("2. 메뉴를 선택해주세요:  ");
 			// 메뉴 DTO에서 메뉴를 받아와서 화면에 뿌려줌
+			
+			
+			List<MenuVO> menulist2 = menulist.findAllByMenu();
+			
+			for(int i =0; i< menulist2.size(); i++) {
+				System.out.println(menulist2.get(i).getName() +" " + menulist2.get(i).getPrice() + "원");
+				
+			}
 
 			// 한글로 메뉴를 입력받음
 			menu = sc.next();
@@ -70,17 +86,12 @@ public class OrderController {
 			if(ys2 == 'Y') {
 				continue label;
 			} else {
-				
-				
-				
-				
-				//?? 런타임 익셉션_ index가 length보다 커서 발생하는데 왜??
-				
-				
+				// NO일때만 break하도록 수정하기
 				
 				// 주문완료 문구 출력
 				List<OrderVO> orderList = od.searchOrderByNo(no);
-				System.out.println("주문이 완료되었습니다! "+ orderList.get(no).getOrderer() +" 님이 주문하신 내역은 다음과 같습니다.");		
+							
+				System.out.println("주문이 완료되었습니다! "+ orderList.get(0).getOrderer() +" 님이 주문하신 내역은 다음과 같습니다.");		
 				for(OrderVO print : orderList) {
 					if(order != null){
 						System.out.println(print.Print());
@@ -103,13 +114,11 @@ public class OrderController {
 				} else {
 					System.out.println("※ 결제하실 금액은 " +(int) priceSum+ "원 입니다. ※" );
 				}
-				
-
-				no ++;
+				no++;
 				break label;
 				
 			}
-		
+			
 		} 
 		
 	}
