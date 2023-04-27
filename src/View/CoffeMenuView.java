@@ -106,7 +106,7 @@ public class CoffeMenuView {
         int number = 0;
 
         for (int i = 0; i < menuList.size(); i++) {
-            System.out.printf("%2d %s\n", i, menuList.get(i));
+            System.out.printf("%2d, %s\n", i, menuList.get(i));
         }
         while (true) {
             try {
@@ -144,11 +144,13 @@ public class CoffeMenuView {
         int number = 0;
         List<String> categoryList = new ArrayList<>(this.menuController.findAllCategory());
         for (int i = 0; i < categoryList.size(); i++) {
-            System.out.println(i + ". " + categoryList.get(i));
+            System.out.println(i + ", " + categoryList.get(i));
         }
         System.out.print("검색할 카테고리 번호를 입력하세요 : ");
         number = sc.nextInt();
         sc.nextLine();
+
+        ClearConsole.clear();
 
         List<MenuVO> menuList = new ArrayList<>();
         menuList = this.menuController.categoryFindAllbyMenu(categoryList.get(number));

@@ -75,7 +75,7 @@ public class AdminOrderView {
         orderDTO.selectAll().forEach(System.out::println);
     }
 
-    public OrderVO randemOrderGenerate() {
+    public OrderVO randemOrderGenerator() {
         int index = random.nextInt(new MenuDTO().findAllByMenu().size());
         boolean usedCoupon = random.nextBoolean();
         MenuVO menuVO = new MenuDTO().findAllByMenu().get(index);
@@ -93,7 +93,7 @@ public class AdminOrderView {
     public void saveByOrder() {
 
         for (int i = 0; i < 20; i++) {
-            orderDTO.insertOrder(randemOrderGenerate());
+            orderDTO.insertOrder(randemOrderGenerator());
         }
 
     }

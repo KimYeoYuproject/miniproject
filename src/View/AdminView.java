@@ -45,7 +45,6 @@ public class AdminView {
                 switch (number) {
                     case 1:
                         new CoffeMenuView(this.menuController).coffeMenu();
-
                         break;
                     case 2:
                         break;
