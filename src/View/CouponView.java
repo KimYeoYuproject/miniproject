@@ -49,7 +49,7 @@ public class CouponView {
     public void useCoupon() {
         ClearConsole.clear();
         String useCoupon = null;
-        System.out.print("사용할 쿠폰 선택 쿠폰 입력 : ");
+        System.out.print("사용할 쿠폰 입력 : ");
         useCoupon = sc.nextLine();
         try {
             this.controller.useCoupon(useCoupon);
