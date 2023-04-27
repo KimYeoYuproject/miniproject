@@ -1,4 +1,4 @@
-package Controller;
+package View;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Controller.CouponController;
+import Controller.MenuController;
+
 import java.util.Date;
 
 import DTO.OrderDTO;
@@ -14,12 +18,7 @@ import Model.MenuVO;
 import Model.OrderVO;
 import View.CouponView;
 
-/**
- * @author miji
- * 저장된 주문정보 데이터를 입력받아 저장하고 금액을 출력해준다.
- * 저장된 주문내역을 출력해준다.
- */
-public class OrderController {
+public class OrderView {
 	
 	MenuController menulist = new MenuController();
 	CouponController couponcon = new CouponController();
@@ -57,21 +56,25 @@ public class OrderController {
 		// 쿠폰이 있는 경우 쿠폰 사용할지 묻기
 		label2:
 		while(true) {
-			coupon = false;
 			System.out.print("쿠폰을 사용하시겠습니까?  Y/N :  ");
 			char ys = sc.next().charAt(0);
 			if(ys == 'Y') {
 				System.out.print("쿠폰번호를 입력해주세요! :  ");
 				String couponnunmber = sc.next();
 				coupon= couponcon.availableCoupon(couponnunmber);
-				if(coupon){
+				if(coupon == true){
 					System.out.println("사용 가능한 쿠폰입니다!");
 					couponcon.useCoupon(couponnunmber);
 					break;
-				}
+				} else {
+					continue label2;
+				  }
+				
 			} else {
+				coupon = false;
 				break;
 			}
+
 		}
 		
 		
@@ -91,7 +94,7 @@ public class OrderController {
 			int selectmenu = sc.nextInt();
 			
 			// 메뉴에 없는 번호 입력시 다시 입력하도록 함
-			if(menulist2.get(selectmenu-1) == null) {
+			if(selectmenu <= 0 || selectmenu > menulist2.size()) {
 				System.out.println("없는 메뉴입니다! 다시 선택하세요");
 				System.out.println();
 				continue label;
@@ -208,9 +211,5 @@ public class OrderController {
 			}
 		}
 	}
-	
-	
-	
-	
 
 }
