@@ -5,41 +5,36 @@ import java.util.Date;
 
 /**
  * @author miji
- * 주문내역 정보를 담을 객체 생성
+ *         주문내역 정보를 담을 객체 생성
  */
 public class OrderVO {
-	
-	private int no;					// 주문번호
-	private String orderer;			// 주문자
-	private String menu;			// 메뉴
-	private int price;				// 가격
-	private Date  date;	// 주문일자
-	private boolean	coupon;			// 쿠폰사용여부
+
+	private int no; // 주문번호
+	private String orderer; // 주문자
+	private String menu; // 메뉴
+	private int price; // 가격
+	private Date date; // 주문일자
+	private boolean coupon; // 쿠폰사용여부
 	private SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-d");
-	
-	
+
 	// toString 생성
 	@Override
 	public String toString() {
-		return "[주문번호 :" + no + ", 주문자: " + orderer + ", 메뉴: " + menu + ", 가격: " + price + "원" +", 주문일자: " + dt.format(date)
+		return "[주문번호 :" + no + ", 주문자: " + orderer
+				+ ", 메뉴: " + menu + ", 가격: " + price + "원"
+				+ ", 주문일자: " + dt.format(date)
 				+ ", 쿠폰사용: " + coupon + "]";
 	}
-	
+
 	public String Print() {
-		String couponYn = null;
-		if(coupon == true) {
-			couponYn = "사용함";
-		} else {
-			couponYn = "사용안함";
-		}
-		
-		return " 메뉴: " + menu + ", 가격: " + price + "원" + ", 쿠폰사용: " + couponYn ;
+		return " 메뉴: " + menu + ", 가격: " + price + "원"
+				+ ", 쿠폰사용: " + (coupon ? "사용함" : "사용안함");
 	}
-	
 
 	// 기본생성자
-	public OrderVO() { }
-	
+	public OrderVO() {
+	}
+
 	// 모든객체 초기화 가능한 생성자
 	public OrderVO(int no, String orderer, String menu, int price, Date date, boolean coupon) {
 		super();
@@ -50,8 +45,7 @@ public class OrderVO {
 		this.date = date;
 		this.coupon = coupon;
 	}
-	
-	
+
 	// getter / setter 생성
 	public int getNo() {
 		return no;
@@ -100,6 +94,5 @@ public class OrderVO {
 	public void setCoupon(boolean coupon) {
 		this.coupon = coupon;
 	}
-	
 
 }

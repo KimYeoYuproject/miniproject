@@ -52,7 +52,7 @@ public class AdminView {
                         new CouponView(this.couponController).couponView();
                         break;
                     case 4:
-                        new Orderview(this.orderController).orderView();
+                        // new Orderview(this.orderController).orderView();
                         break;
                     case 9:
                         System.out.println("관리자 메뉴 종료 합니다");
