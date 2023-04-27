@@ -17,7 +17,7 @@ public class CouponView {
     }
 
     public void findCoupon() {
-        ClearConsole.clear();
+
         String findCoupon = null;
         System.out.print("찾을 쿠폰입력 : ");
         findCoupon = sc.nextLine();
@@ -29,12 +29,12 @@ public class CouponView {
     }
 
     public void findAllCoupon() {
-        ClearConsole.clear();
+
         this.controller.findAllByCounpon().forEach(System.out::println);
     }
 
     public void delCoupon() {
-        ClearConsole.clear();
+
         String delCoupon = null;
         System.out.print("삭제할 쿠폰 입력 : ");
         delCoupon = sc.nextLine();
@@ -63,7 +63,7 @@ public class CouponView {
     }
 
     public void availableCoupon() throws InputMismatchException {
-        ClearConsole.clear();
+
         String useCoupon = null;
         System.out.print("사용할 쿠폰 선택 쿠폰 입력 : ");
         useCoupon = sc.nextLine();
@@ -95,7 +95,7 @@ public class CouponView {
             System.out.print("사용할 메뉴 선택 : ");
             number = sc.nextInt();
             sc.nextLine();
-
+            ClearConsole.clear();
             switch (number) {
                 case 1:
                     createCoupon(10, 20);

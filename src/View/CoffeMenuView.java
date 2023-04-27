@@ -23,7 +23,6 @@ public class CoffeMenuView {
     }
 
     public void addMenu() throws InputMismatchException {
-        ClearConsole.clear();
 
         String name = null;
         String category = null;
@@ -48,7 +47,6 @@ public class CoffeMenuView {
     }
 
     public void findByMenu() {
-        ClearConsole.clear();
 
         String name = null;
 
@@ -66,7 +64,6 @@ public class CoffeMenuView {
     }
 
     public void findAllByMenu() {
-        ClearConsole.clear();
 
         try {
             this.menuController.findAllByMenu().forEach(System.out::println);
@@ -76,7 +73,6 @@ public class CoffeMenuView {
     }
 
     public void deleteByMenu() {
-        ClearConsole.clear();
 
         String name;
 
@@ -99,12 +95,11 @@ public class CoffeMenuView {
     }
 
     public void findAllCategory() {
-        ClearConsole.clear();
+
         this.menuController.findAllCategory().forEach(System.out::println);
     }
 
     public void modifyByMenu() throws InputMismatchException {
-        ClearConsole.clear();
 
         List<MenuVO> menuList = this.menuController.findAllByMenu();
 
@@ -145,7 +140,7 @@ public class CoffeMenuView {
     }
 
     public void categoryFindAllbyMenu() throws InputMismatchException {
-        ClearConsole.clear();
+
         int number = 0;
         List<String> categoryList = new ArrayList<>(this.menuController.findAllCategory());
         for (int i = 0; i < categoryList.size(); i++) {
@@ -179,6 +174,7 @@ public class CoffeMenuView {
             System.out.print("사용할 메뉴 선택 : ");
             number = sc.nextInt();
             sc.nextLine();
+            ClearConsole.clear();
             switch (number) {
                 case 1:
                     addMenu();

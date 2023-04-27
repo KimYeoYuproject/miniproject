@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
-import Controller.OrderController;
+import DTO.OrderDTO;
 
 /**
  * @author yoosc89
@@ -15,16 +15,16 @@ public class AdminView {
 
     private CouponController couponController;
     private MenuController menuController;
-    private OrderController orderController;
+    private OrderDTO orderDTO;
 
     private Scanner sc = new Scanner(System.in);
     private int number;
 
     public AdminView(CouponController couponController, MenuController menuController,
-            OrderController orderController) {
+            OrderDTO orderDTO) {
         this.couponController = couponController;
         this.menuController = menuController;
-        this.orderController = orderController;
+        this.orderDTO = orderDTO;
     }
 
     public void adminView() throws IOException {
@@ -32,7 +32,7 @@ public class AdminView {
             label: while (true) {
                 ClearConsole.clear();
                 System.out.println("======= 관리자 메뉴 ========");
-                System.out.println("1. 주문 관리");
+                System.out.println("1. 메뉴 관리");
                 System.out.println("2. 계정 관리");
                 System.out.println("3. 쿠폰 관리");
                 System.out.println("4. 주문 내역");
@@ -41,10 +41,11 @@ public class AdminView {
                 System.out.print("메뉴를 입력하세요 : ");
                 number = sc.nextInt();
                 sc.nextLine();
-
+                ClearConsole.clear();
                 switch (number) {
                     case 1:
                         new CoffeMenuView(this.menuController).coffeMenu();
+
                         break;
                     case 2:
                         break;
@@ -52,7 +53,7 @@ public class AdminView {
                         new CouponView(this.couponController).couponView();
                         break;
                     case 4:
-                        // new Orderview(this.orderController).orderView();
+                        new AdminOrderView(this.orderDTO).adminOrderView();
                         break;
                     case 9:
                         System.out.println("관리자 메뉴 종료 합니다");
@@ -68,4 +69,5 @@ public class AdminView {
         }
 
     }
+
 }
