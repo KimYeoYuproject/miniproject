@@ -40,7 +40,8 @@ public class TestYeo {
 	    	System.out.println("♥어서오세요~ 카페김여유 입니다^___^! 메뉴를 선택해주세요♥"); // 초기메뉴...
 	    	System.out.println("1. 주문하기");
 	    	System.out.println("2. 주문내역보기");
-	    	System.out.println("3. 관리자메뉴");
+	    	System.out.println("3. 회원정보");
+	    	System.out.println("4. 관리자메뉴");
 	    	System.out.println("4. 종료하기");
 	    	int menu = sc.nextInt();
 	    	
@@ -51,7 +52,7 @@ public class TestYeo {
 	    			order.insertOrder();
 	    			
 	    			System.out.println();
-	    			System.out.println("새로 주문하시겠습니까?");
+	    			System.out.println("새로 주문하시겠습니까?  Y/N :  ");
 	    			char ys = sc.next().charAt(0);
 	    			if(ys == 'Y') {
 	    				continue;

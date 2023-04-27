@@ -44,9 +44,17 @@ public class OrderDTO {
 	}
 	
 	
+	// 주문번호로 삭제 (결제안함 선택시)
+	public void deleteOrderByNo(int number) {
+
+		for(int i = orderList.size()-1 ; i >= 0; i--) {
+			if(orderList.get(i).getNo() == number) {
+				orderList.remove(i);
+			}
+		}		
+	}
 	
-	
-	
+
 	// 주문자를 찾는 메소드 생성
 	public OrderVO searchOrderer(int number) {
 		OrderVO order = new OrderVO();
@@ -60,10 +68,7 @@ public class OrderDTO {
 		
 	}
 
-	
-	
 
-	
 	
 	// 고객번호로 서치
 	public List<OrderVO> searchOrderByOrderer(String orderer) {

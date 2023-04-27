@@ -15,7 +15,7 @@ public class OrderVO {
 	private int price;				// 가격
 	private Date  date;	// 주문일자
 	private boolean	coupon;			// 쿠폰사용여부
-	SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-d");
+	private SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-d");
 	
 	
 	// toString 생성
