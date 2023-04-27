@@ -1,8 +1,6 @@
 package View;
 
-import java.nio.CharBuffer;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
