@@ -84,7 +84,7 @@ public class UserView {
                     updateUserVO.setPhone(updatePhoneNuber);
                     break;
                 case 9:
-                    break;
+                    return;
                 default:
                     System.out.println("없는 메뉴 입니다.");
                     break;
