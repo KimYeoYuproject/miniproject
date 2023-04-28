@@ -1,7 +1,6 @@
 package Model;
 
 public class UserVO {
-
     // 핸드폰 번호 필드(필드변수)
 
     // 이름(필드변수)
