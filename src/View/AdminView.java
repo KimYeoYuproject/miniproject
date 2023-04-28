@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
+import Controller.UserController;
 import DTO.OrderDTO;
 
 /**
@@ -15,16 +16,18 @@ public class AdminView {
 
     private CouponController couponController;
     private MenuController menuController;
+    private UserController userController;
     private OrderDTO orderDTO;
 
     private Scanner sc = new Scanner(System.in);
     private int number;
 
     public AdminView(CouponController couponController, MenuController menuController,
-            OrderDTO orderDTO) {
+            OrderDTO orderDTO, UserController userController) {
         this.couponController = couponController;
         this.menuController = menuController;
         this.orderDTO = orderDTO;
+        this.userController = userController;
     }
 
     public void adminView() throws IOException {
@@ -35,7 +38,8 @@ public class AdminView {
                 System.out.println("1. 메뉴 관리");
                 System.out.println("2. 계정 관리");
                 System.out.println("3. 쿠폰 관리");
-                System.out.println("4. 주문 내역");
+                System.out.println("4. 회원 관리");
+                System.out.println("5. 주문 내역");
                 System.out.println("9. 관리자 메뉴 종료");
                 System.out.println();
                 System.out.print("메뉴를 입력하세요 : ");
@@ -52,6 +56,8 @@ public class AdminView {
                         new CouponView(this.couponController).couponView();
                         break;
                     case 4:
+                        new UserView(this.userController).userView();
+                    case 5:
                         new AdminOrderView(this.orderDTO).adminOrderView();
                         break;
                     case 9:

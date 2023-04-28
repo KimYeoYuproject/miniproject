@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
+import Controller.UserController;
 import DTO.OrderDTO;
 import View.AdminView;
 import View.ClearConsole;
@@ -12,6 +13,7 @@ import View.ClearConsole;
 public class TestYu {
     private CouponController couponController = new CouponController();
     private MenuController menuController = new MenuController();
+    private UserController userController = new UserController();
     private OrderDTO orderDTO = new OrderDTO();
 
     private Scanner sc = new Scanner(System.in);
@@ -32,7 +34,7 @@ public class TestYu {
             switch (number) {
                 case 1:
                     try {
-                        new AdminView(couponController, menuController, orderDTO).adminView();
+                        new AdminView(couponController, menuController, orderDTO, userController).adminView();
                     } catch (IOException e) {
                         System.out.println("오류가 발생했습니다.");
                         e.printStackTrace();
