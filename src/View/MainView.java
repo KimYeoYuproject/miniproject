@@ -41,6 +41,7 @@ public class MainView {
 	    			char ys = sc.next().charAt(0);
 	    			if(ys == 'Y') {
 	    				continue label;
+	    				// 123
 	    				
 	    			} else {
 	    				break;
