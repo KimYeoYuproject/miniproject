@@ -18,7 +18,7 @@ public class UserController {
 		return userDto.getUserVo(phone);
 	}
 	
-    // 회원정보 수정
+    // 회원정보 수정 
 	public void updateUser(UserVO userVo, UserVO updateUserVo) {
 		userDto.updateUser(userVo, updateUserVo);
 	}
