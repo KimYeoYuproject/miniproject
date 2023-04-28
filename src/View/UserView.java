@@ -10,17 +10,29 @@ import Model.UserVO;
 public class UserView {
     private UserController userController;
 
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
+
+    private final String PHONE_NUMBER_REGEX = "010[0-9]{8}";
 
     public UserView(UserController userController) {
         this.userController = userController;
     }
 
+    public String phoneNumberValidate() {
+        String phoneNumber;
+        while (true) {
+            System.out.print("연락처를 입력하세요 (-제외) : ");
+            phoneNumber = sc.nextLine();
+            if (phoneNumber.matches(PHONE_NUMBER_REGEX)) {
+                return phoneNumber;
+            }
+            System.out.println("연락처 형식이 아닙니다. ex) 01012341234 형식으로 입력하세요");
+        }
+    }
+
     public void findByUser() {
         System.out.println("======== 회원 조회 =======");
-        System.out.print("조회한 회원의 연락처를 입력하하세요 : ");
-        String phoneNumber = sc.nextLine();
-        UserVO userVO = userController.getUser(phoneNumber);
+        UserVO userVO = userController.getUser(phoneNumberValidate());
         System.out.println(userVO);
     }
 
@@ -35,8 +47,7 @@ public class UserView {
     public void addUser() {
         System.out.println("====== 회원 추가 ======");
 
-        System.out.print("연락처 : ");
-        String phoneNumber = sc.nextLine();
+        String phoneNumber = phoneNumberValidate();
 
         System.out.print("회원 이름 : ");
         String name = sc.nextLine();
@@ -46,9 +57,9 @@ public class UserView {
     }
 
     public void modifyByUser() {
+        System.out.println("======= 회원 정보 수정 =======");
 
-        System.out.print("수정할 계정(연락처)를 입력하세요 : ");
-        String phoneNumber = sc.nextLine();
+        String phoneNumber = phoneNumberValidate();
         UserVO userVO = userController.getUser(phoneNumber);
         UserVO updateUserVO = userController.getUser(phoneNumber);
 
@@ -85,8 +96,8 @@ public class UserView {
     }
 
     public void deleteByUser() {
-        System.out.print("삭제할 계정(연락처)를 입력하세요 : ");
-        String phoneNumber = sc.nextLine();
+        System.out.println("========= 계정 삭제 ========");
+        String phoneNumber = phoneNumberValidate();
         userController.deleteUser(userController.getUser(phoneNumber));
         System.out.println(phoneNumber + "을(를) 삭제했습니다.");
     }
