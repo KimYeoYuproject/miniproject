@@ -25,12 +25,21 @@ public class OrderController {
 	CouponController couponcon = new CouponController();
 	CouponView couponlist = new CouponView(couponcon);
 	
-	private OrderDTO od =  new OrderDTO();
+	private OrderDTO od;
 	private Scanner sc = new Scanner(System.in);
 	private java.util.Date today = new java.util.Date();
 	private int no = 1;		  // 주문번호는 1번부터 시작하여 새로운 주문건 마다 1씩 늘어나도록 하기
 	private Date date= today; // 주문일자를 현재시간으로 저장해줌
 	
+	
+	
+	public OrderController(OrderDTO od) {
+		super();
+		this.od = od;
+	}
+
+
+
 	// 주문정보 입력받아 배열에 저장하기
 	public void insertOrder() {
 		SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-DD");
@@ -120,7 +129,7 @@ public class OrderController {
 					// 현재 주문자의 정보를 추력하기 위해 객체 리스트 생성
 					List<OrderVO> orderList = od.searchOrderByNo(no);
 					System.out.println("주문이 완료되었습니다! "+ orderList.get(0).getOrderer() +" 님이 주문하신 내역은 다음과 같습니다.");	
-					System.out.println("====================== 주 문 내 역 =======================");
+					System.out.println("============ 주 문 내 역 ============= 주문번호 : "+ no +" ========");
 					for(OrderVO print : orderList) {
 						if(order != null){
 							System.out.println(print.Print());
@@ -156,7 +165,6 @@ public class OrderController {
 					} else {
 						// Y입력 안하면 주문이 취소되고 현재 정보가 배열에서 삭제됨
 						System.out.println("주문이 취소되었습니다.");
-						System.out.println(no);
 						od.deleteOrderByNo(no);
 						selectAll();
 						break;
