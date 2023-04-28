@@ -71,6 +71,7 @@ public class UserView {
 
             System.out.println("수정할 항목을 선택하세요");
             int number = sc.nextInt();
+            sc.nextLine();
 
             switch (number) {
                 case 1:
@@ -79,8 +80,8 @@ public class UserView {
                     updateUserVO.setName(updateName);
                     break;
                 case 2:
-                    System.out.print("현재값(" + userVO.getPhone() + ") 변경 : ");
-                    String updatePhoneNuber = sc.nextLine();
+                    System.out.println("현재값(" + userVO.getPhone() + ") 변경 : ");
+                    String updatePhoneNuber = phoneNumberValidate();
                     updateUserVO.setPhone(updatePhoneNuber);
                     break;
                 case 9:
