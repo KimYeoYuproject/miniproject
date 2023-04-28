@@ -32,7 +32,7 @@ public class OrderController {
 	private Date date= today; // 주문일자를 현재시간으로 저장해줌
 	
 	
-	
+	 
 	public OrderController(OrderDTO od) {
 		super();
 		this.od = od;
