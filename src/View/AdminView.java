@@ -1,6 +1,5 @@
 package View;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -30,7 +29,7 @@ public class AdminView {
         this.userController = userController;
     }
 
-    public void adminView() throws IOException {
+    public void adminView() {
         try {
             label: while (true) {
                 ClearConsole.clear();

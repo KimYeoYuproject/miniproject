@@ -21,8 +21,11 @@ public class UserView {
     public String phoneNumberValidate() {
         String phoneNumber;
         while (true) {
-            System.out.print("연락처를 입력하세요 (-제외) : ");
+            System.out.print("연락처를 입력하세요 (-제외) (종료 -> 공란 엔터) : ");
             phoneNumber = sc.nextLine();
+            if (phoneNumber == "") {
+                return null;
+            }
             if (phoneNumber.matches(REGEX_PHONE_NUMBER)) {
                 return phoneNumber;
             }
@@ -32,7 +35,12 @@ public class UserView {
 
     public void findByUser() {
         System.out.println("======== 회원 조회 =======");
-        UserVO userVO = userController.getUser(phoneNumberValidate());
+        String phoneNumber = phoneNumberValidate();
+        if (phoneNumber == null) {
+            return;
+        }
+
+        UserVO userVO = userController.getUser(phoneNumber);
         System.out.println(userVO);
     }
 
@@ -48,7 +56,9 @@ public class UserView {
         System.out.println("====== 회원 추가 ======");
 
         String phoneNumber = phoneNumberValidate();
-
+        if (phoneNumber == null) {
+            return;
+        }
         System.out.print("회원 이름 : ");
         String name = sc.nextLine();
 
@@ -60,6 +70,9 @@ public class UserView {
         System.out.println("======= 회원 정보 수정 =======");
 
         String phoneNumber = phoneNumberValidate();
+        if (phoneNumber == null) {
+            return;
+        }
         UserVO userVO = userController.getUser(phoneNumber);
         UserVO updateUserVO = userController.getUser(phoneNumber);
 
@@ -100,6 +113,9 @@ public class UserView {
     public void deleteByUser() {
         System.out.println("========= 계정 삭제 ========");
         String phoneNumber = phoneNumberValidate();
+        if (phoneNumber == null) {
+            return;
+        }
         userController.deleteUser(userController.getUser(phoneNumber));
         System.out.println(phoneNumber + "을(를) 삭제했습니다.");
     }
@@ -108,6 +124,7 @@ public class UserView {
         int number;
 
         label: while (true) {
+            ClearConsole.clear();
             System.out.println("===== 회원 기능 =====");
             System.out.println("1. 회원 조회");
             System.out.println("2. 전체 회원 조회");

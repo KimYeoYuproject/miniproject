@@ -1,10 +1,14 @@
 package run;
 
-import View.TestView;
+import View.MainView;
 
 public class Application {
 	public static void main(String[] args) {
-		new TestView().testView();
+		try {
+			new MainView().mainView();
+		} catch (Exception e) {
+			System.out.println("오류가 발생되어 프로그램을 종료합니다.");
+		}
 
 	}
 
