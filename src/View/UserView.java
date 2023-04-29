@@ -38,8 +38,8 @@ public class UserView {
 
     public void findAllByUser() {
         System.out.println("======== 전체 회원 조회 =======");
-        userController.findAllByUser().stream().forEach(
-                x -> System.out.println(
+        userController.findAllByUser()
+                .stream().forEach(x -> System.out.println(
                         "연락처 : " + x.getPhone() + ", 이름 : " + x.getName() + ", 생성날짜 : " + x.getCreateDate()));
         ;
     }

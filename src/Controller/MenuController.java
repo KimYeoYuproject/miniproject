@@ -33,10 +33,10 @@ public class MenuController {
      * @param menu
      * @return
      */
-    public boolean modifyByMenu(MenuVO menu) {
-        MenuVO menuVO = findByMenu(menu.getName());
+    public boolean modifyByMenu(MenuVO oldMenu, MenuVO newMenu) {
+        MenuVO menuVO = findByMenu(oldMenu.getName());
         if (menuVO != null) {
-            return this.menuDTO.modifyByMenu(menuVO);
+            return this.menuDTO.modifyByMenu(oldMenu, newMenu);
         }
         return false;
     }

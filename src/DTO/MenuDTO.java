@@ -29,7 +29,8 @@ public class MenuDTO {
     }
 
     public Optional<MenuVO> findByMenu(String menuName) {
-        return this.menuVO.stream().filter(menuVO -> menuVO.getName().equals(menuName)).findFirst();
+        return this.menuVO.stream()
+                .filter(menuVO -> menuVO.getName().equals(menuName)).findFirst();
     }
 
     public List<MenuVO> findAllByMenu() {
@@ -41,12 +42,14 @@ public class MenuDTO {
         return this.menuVO.add(menu);
     }
 
-    public boolean modifyByMenu(MenuVO menu) {
+    public boolean modifyByMenu(MenuVO oldMenu, MenuVO newMenu) {
         for (int i = 0; i < menuVO.size(); i++) {
-            if (this.menuVO.get(i).getName().equals(menu.getName())) {
-                this.menuVO.get(i).setName(menu.getName());
-                this.menuVO.get(i).setCategory(menu.getCategory());
-                this.menuVO.get(i).setPrice(menu.getPrice());
+            if (this.menuVO.get(i).getName().equals(oldMenu.getName())) {
+                this.menuVO.get(i)
+                        .setName(newMenu.getName())
+                        .setCategory(newMenu.getCategory())
+                        .setPrice(newMenu.getPrice());
+                System.out.println(this.menuVO.get(i));
                 return true;
             }
         }

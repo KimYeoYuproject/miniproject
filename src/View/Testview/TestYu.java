@@ -7,6 +7,7 @@ import Controller.CouponController;
 import Controller.MenuController;
 import Controller.UserController;
 import DTO.OrderDTO;
+import Model.CouponVO;
 import View.AdminView;
 import View.ClearConsole;
 
@@ -19,6 +20,7 @@ public class TestYu {
     private Scanner sc = new Scanner(System.in);
 
     public void view() {
+
         ClearConsole.clear();
         couponController.couponGenerate(10, 20);
         int number = 0;

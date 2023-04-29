@@ -47,9 +47,10 @@ public class CouponDTO {
     public void modifyByCoupon(CouponVO couponVO) {
         for (int i = 0; i < this.coupons.size(); i++) {
             if (this.coupons.get(i).getCoupon().equals(couponVO.getCoupon())) {
-                this.coupons.get(i).setCoupon(couponVO.getCoupon());
-                this.coupons.get(i).setExpDate(couponVO.getExpDate());
-                this.coupons.get(i).setAvailable(couponVO.getAvailable());
+                this.coupons.get(i)
+                        .setCoupon(couponVO.getCoupon())
+                        .setExpDate(couponVO.getExpDate())
+                        .setAvailable(couponVO.getAvailable());
             }
         }
     }

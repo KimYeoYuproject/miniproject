@@ -79,7 +79,7 @@ public class CoffeMenuView {
             int number = sc.nextInt();
             sc.nextLine();
 
-            label: switch (number) {
+            switch (number) {
                 case 1:
                     menuList.sort(Comparator.comparing(MenuVO::getName));
                     break;
@@ -99,7 +99,7 @@ public class CoffeMenuView {
                     menuList.sort(Comparator.comparing(MenuVO::getPrice).reversed());
                     break;
                 case 9:
-                    break label;
+                    return;
                 default:
                     System.out.println("업는 메뉴 입니다.");
                     break;
@@ -165,18 +165,22 @@ public class CoffeMenuView {
 
         System.out.printf("메뉴 이름(변경 없으면 공란 엔터) (현재값 : %s) : ", menuList.get(number).getName());
         name = sc.nextLine();
-        menuList.get(number).setName(name == "" ? menuList.get(number).getName() : name);
 
         System.out.printf("메뉴 카테고리(변경 없으면 공란 엔터) (현재값 : %s) : ", menuList.get(number).getCategory());
         category = sc.nextLine();
-        menuList.get(number).setCategory(category == "" ? menuList.get(number).getCategory() : category);
 
         System.out.printf("메뉴 이름(수정 없으면 0 입력 후 엔터) (현재값 : %s) : ", menuList.get(number).getPrice());
         price = sc.nextInt();
         sc.nextLine();
-        menuList.get(number).setPrice(price == 0 ? menuList.get(number).getPrice() : price);
 
-        this.menuController.modifyByMenu(menuList.get(number));
+        MenuVO menuVO = new MenuVO()
+                .setName(name == "" ? menuList.get(number).getName() : name)
+                .setCategory(category == "" ? menuList.get(number).getCategory() : category)
+                .setPrice(price == 0 ? menuList.get(number).getPrice() : price)
+                .setCreateDate(menuList.get(number).getCreateDate())
+                .build();
+
+        this.menuController.modifyByMenu(menuList.get(number), menuVO);
     }
 
     public void categoryFindAllbyMenu() throws InputMismatchException {
