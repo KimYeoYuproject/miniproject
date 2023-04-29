@@ -29,7 +29,7 @@ public class MainView {
 			System.out.println("2. 주문내역보기");
 			System.out.println("3. 회원정보");
 			System.out.println("4. 관리자메뉴");
-			System.out.println("5. 종료하기");
+			System.out.println("9. 종료하기");
 			int menu = sc.nextInt();
 
 			switch (menu) {
@@ -60,7 +60,7 @@ public class MainView {
 				case 4:
 					new AdminView(couponController, menuController, orderDto, userController).adminView();
 					break;
-				case 5:
+				case 9:
 					System.out.println("시스템을 종료합니다.");
 					break mainlabel;
 
