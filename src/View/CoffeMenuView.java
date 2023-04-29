@@ -2,6 +2,7 @@ package View;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -64,9 +65,48 @@ public class CoffeMenuView {
     }
 
     public void findAllByMenu() {
-
         try {
-            this.menuController.findAllByMenu().forEach(System.out::println);
+            List<MenuVO> menuList = this.menuController.findAllByMenu();
+            System.out.println("===== 정렬 방법 선택 =====");
+            System.out.println("1.메뉴이름(ASC)");
+            System.out.println("2.메뉴이름(DESC)");
+            System.out.println("3.카테고리(ASC)");
+            System.out.println("4.카테고리(DESC)");
+            System.out.println("5.가격(ASC)");
+            System.out.println("6.가격(DESC)");
+            System.out.println("9.종료");
+
+            int number = sc.nextInt();
+            sc.nextLine();
+
+            label: switch (number) {
+                case 1:
+                    menuList.sort(Comparator.comparing(MenuVO::getName));
+                    break;
+                case 2:
+                    menuList.sort(Comparator.comparing(MenuVO::getName).reversed());
+                    break;
+                case 3:
+                    menuList.sort(Comparator.comparing(MenuVO::getCategory));
+                    break;
+                case 4:
+                    menuList.sort(Comparator.comparing(MenuVO::getCategory).reversed());
+                    break;
+                case 5:
+                    menuList.sort(Comparator.comparing(MenuVO::getPrice));
+                    break;
+                case 6:
+                    menuList.sort(Comparator.comparing(MenuVO::getPrice).reversed());
+                    break;
+                case 9:
+                    break label;
+                default:
+                    System.out.println("업는 메뉴 입니다.");
+                    break;
+
+            }
+            menuList.forEach(System.out::println);
+
         } catch (NullPointerException e) {
             System.out.println("메뉴가 없습니다.");
         }
@@ -95,8 +135,8 @@ public class CoffeMenuView {
     }
 
     public void findAllCategory() {
-
         this.menuController.findAllCategory().forEach(System.out::println);
+
     }
 
     public void modifyByMenu() throws InputMismatchException {

@@ -12,7 +12,7 @@ public class UserView {
 
     private Scanner sc = new Scanner(System.in);
 
-    private final String PHONE_NUMBER_REGEX = "010[0-9]{8}";
+    private final String REGEX_PHONE_NUMBER = "010[0-9]{8}";
 
     public UserView(UserController userController) {
         this.userController = userController;
@@ -23,7 +23,7 @@ public class UserView {
         while (true) {
             System.out.print("연락처를 입력하세요 (-제외) : ");
             phoneNumber = sc.nextLine();
-            if (phoneNumber.matches(PHONE_NUMBER_REGEX)) {
+            if (phoneNumber.matches(REGEX_PHONE_NUMBER)) {
                 return phoneNumber;
             }
             System.out.println("연락처 형식이 아닙니다. ex) 01012341234 형식으로 입력하세요");
@@ -38,9 +38,9 @@ public class UserView {
 
     public void findAllByUser() {
         System.out.println("======== 전체 회원 조회 =======");
-        userController.findAllByUser().stream().forEach(x -> {
-            System.out.println("연락처 : " + x.getPhone() + ", 이름 : " + x.getName() + ", 생성날짜 : " + x.getCreateDate());
-        });
+        userController.findAllByUser().stream().forEach(
+                x -> System.out.println(
+                        "연락처 : " + x.getPhone() + ", 이름 : " + x.getName() + ", 생성날짜 : " + x.getCreateDate()));
         ;
     }
 
@@ -64,6 +64,7 @@ public class UserView {
         UserVO updateUserVO = userController.getUser(phoneNumber);
 
         while (true) {
+            ClearConsole.clear();
             System.out.println("====== 회원 정보 수정 ======");
             System.out.println("1. " + userVO.getName());
             System.out.println("2. " + userVO.getPhone());

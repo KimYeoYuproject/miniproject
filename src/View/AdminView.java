@@ -38,8 +38,7 @@ public class AdminView {
                 System.out.println("1. 메뉴 관리");
                 System.out.println("2. 계정 관리");
                 System.out.println("3. 쿠폰 관리");
-                System.out.println("4. 회원 관리");
-                System.out.println("5. 주문 내역");
+                System.out.println("4. 주문 내역");
                 System.out.println("9. 관리자 메뉴 종료");
                 System.out.println();
                 System.out.print("메뉴를 입력하세요 : ");
@@ -51,13 +50,12 @@ public class AdminView {
                         new CoffeMenuView(this.menuController).coffeMenu();
                         break;
                     case 2:
+                        new UserView(this.userController).userView();
                         break;
                     case 3:
                         new CouponView(this.couponController).couponView();
                         break;
                     case 4:
-                        new UserView(this.userController).userView();
-                    case 5:
                         new AdminOrderView(this.orderDTO).adminOrderView();
                         break;
                     case 9:
