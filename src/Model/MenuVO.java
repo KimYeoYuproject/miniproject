@@ -36,32 +36,39 @@ public class MenuVO {
         return name;
     }
 
-    public void setName(String name) {
+    public MenuVO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public MenuVO setCategory(String category) {
         this.category = category;
+        return this;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public MenuVO setPrice(int price) {
         this.price = price;
+        return this;
     }
 
     public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public MenuVO setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
+        return this;
     }
 
+    public MenuVO build() {
+        return new MenuVO(name, category, price, createDate);
+    }
 }

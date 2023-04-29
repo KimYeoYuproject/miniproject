@@ -2,6 +2,7 @@ package View;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -64,9 +65,48 @@ public class CoffeMenuView {
     }
 
     public void findAllByMenu() {
-
         try {
-            this.menuController.findAllByMenu().forEach(System.out::println);
+            List<MenuVO> menuList = this.menuController.findAllByMenu();
+            System.out.println("===== 정렬 방법 선택 =====");
+            System.out.println("1.메뉴이름(ASC)");
+            System.out.println("2.메뉴이름(DESC)");
+            System.out.println("3.카테고리(ASC)");
+            System.out.println("4.카테고리(DESC)");
+            System.out.println("5.가격(ASC)");
+            System.out.println("6.가격(DESC)");
+            System.out.println("9.종료");
+
+            int number = sc.nextInt();
+            sc.nextLine();
+
+            switch (number) {
+                case 1:
+                    menuList.sort(Comparator.comparing(MenuVO::getName));
+                    break;
+                case 2:
+                    menuList.sort(Comparator.comparing(MenuVO::getName).reversed());
+                    break;
+                case 3:
+                    menuList.sort(Comparator.comparing(MenuVO::getCategory));
+                    break;
+                case 4:
+                    menuList.sort(Comparator.comparing(MenuVO::getCategory).reversed());
+                    break;
+                case 5:
+                    menuList.sort(Comparator.comparing(MenuVO::getPrice));
+                    break;
+                case 6:
+                    menuList.sort(Comparator.comparing(MenuVO::getPrice).reversed());
+                    break;
+                case 9:
+                    return;
+                default:
+                    System.out.println("업는 메뉴 입니다.");
+                    break;
+
+            }
+            menuList.forEach(System.out::println);
+
         } catch (NullPointerException e) {
             System.out.println("메뉴가 없습니다.");
         }
@@ -95,8 +135,8 @@ public class CoffeMenuView {
     }
 
     public void findAllCategory() {
-
         this.menuController.findAllCategory().forEach(System.out::println);
+
     }
 
     public void modifyByMenu() throws InputMismatchException {
@@ -106,7 +146,7 @@ public class CoffeMenuView {
         int number = 0;
 
         for (int i = 0; i < menuList.size(); i++) {
-            System.out.printf("%2d %s\n", i, menuList.get(i));
+            System.out.printf("%2d, %s\n", i, menuList.get(i));
         }
         while (true) {
             try {
@@ -125,18 +165,22 @@ public class CoffeMenuView {
 
         System.out.printf("메뉴 이름(변경 없으면 공란 엔터) (현재값 : %s) : ", menuList.get(number).getName());
         name = sc.nextLine();
-        menuList.get(number).setName(name == "" ? menuList.get(number).getName() : name);
 
         System.out.printf("메뉴 카테고리(변경 없으면 공란 엔터) (현재값 : %s) : ", menuList.get(number).getCategory());
         category = sc.nextLine();
-        menuList.get(number).setCategory(category == "" ? menuList.get(number).getCategory() : category);
 
         System.out.printf("메뉴 이름(수정 없으면 0 입력 후 엔터) (현재값 : %s) : ", menuList.get(number).getPrice());
         price = sc.nextInt();
         sc.nextLine();
-        menuList.get(number).setPrice(price == 0 ? menuList.get(number).getPrice() : price);
 
-        this.menuController.modifyByMenu(menuList.get(number));
+        MenuVO menuVO = new MenuVO()
+                .setName(name == "" ? menuList.get(number).getName() : name)
+                .setCategory(category == "" ? menuList.get(number).getCategory() : category)
+                .setPrice(price == 0 ? menuList.get(number).getPrice() : price)
+                .setCreateDate(menuList.get(number).getCreateDate())
+                .build();
+
+        this.menuController.modifyByMenu(menuList.get(number), menuVO);
     }
 
     public void categoryFindAllbyMenu() throws InputMismatchException {
@@ -144,11 +188,13 @@ public class CoffeMenuView {
         int number = 0;
         List<String> categoryList = new ArrayList<>(this.menuController.findAllCategory());
         for (int i = 0; i < categoryList.size(); i++) {
-            System.out.println(i + ". " + categoryList.get(i));
+            System.out.println(i + ", " + categoryList.get(i));
         }
         System.out.print("검색할 카테고리 번호를 입력하세요 : ");
         number = sc.nextInt();
         sc.nextLine();
+
+        ClearConsole.clear();
 
         List<MenuVO> menuList = new ArrayList<>();
         menuList = this.menuController.categoryFindAllbyMenu(categoryList.get(number));

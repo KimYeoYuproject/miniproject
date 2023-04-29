@@ -1,8 +1,7 @@
 package View;
 
-import java.nio.CharBuffer;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -74,10 +73,11 @@ public class AdminOrderView {
     }
 
     public void findAllByOrder() {
+        orderDTO.selectAll().sort(Comparator.comparing(OrderVO::getNo));
         orderDTO.selectAll().forEach(System.out::println);
     }
 
-    public OrderVO randemOrderGenerate() {
+    public OrderVO randemOrderGenerator() {
         int index = random.nextInt(new MenuDTO().findAllByMenu().size());
         boolean usedCoupon = random.nextBoolean();
         MenuVO menuVO = new MenuDTO().findAllByMenu().get(index);
@@ -87,7 +87,7 @@ public class AdminOrderView {
             stringBuilder.append((char) c);
 
         }
-        return new OrderVO(index, stringBuilder.toString(),
+        return new OrderVO(new Random().nextInt(30), stringBuilder.toString(),
                 menuVO.getName(), menuVO.getPrice(),
                 new Date(), usedCoupon);
     }
@@ -95,12 +95,13 @@ public class AdminOrderView {
     public void saveByOrder() {
 
         for (int i = 0; i < 20; i++) {
-            orderDTO.insertOrder(randemOrderGenerate());
+            orderDTO.insertOrder(randemOrderGenerator());
         }
 
     }
 
     public void deleteOrderByNo() {
+        findAllByOrder();
         System.out.println("삭제할 주문번호를 입력하세요 : ");
         int number = sc.nextInt();
         orderDTO.deleteOrderByNo(number);

@@ -1,6 +1,7 @@
 package Controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import DTO.OrderDTO;
 import Model.CouponVO;
 import Model.MenuVO;
 import Model.OrderVO;
+import Model.UserVO;
 import View.CouponView;
+import View.UserView;
 
 /**
  * @author miji
@@ -24,8 +27,10 @@ public class OrderController {
 	MenuController menulist = new MenuController();
 	CouponController couponcon = new CouponController();
 	CouponView couponlist = new CouponView(couponcon);
+
 	
 	private OrderDTO od;
+	private UserController usercon;
 	private Scanner sc = new Scanner(System.in);
 	private java.util.Date today = new java.util.Date();
 	private int no = 1;		  // 주문번호는 1번부터 시작하여 새로운 주문건 마다 1씩 늘어나도록 하기
@@ -33,9 +38,10 @@ public class OrderController {
 	
 	
 	
-	public OrderController(OrderDTO od) {
-		super();
+	public OrderController(OrderDTO od, UserController usercon) {
+
 		this.od = od;
+		this.usercon = usercon;
 	}
 
 
@@ -45,6 +51,7 @@ public class OrderController {
 		SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-DD");
 		dt.format(new Date());
 		String orderer;
+		String name;
 		String menu;
 		int price;
 		boolean coupon = false;
@@ -59,8 +66,18 @@ public class OrderController {
 		
 		// 주문자는 전화번호를 입력받아 저장
 		System.out.println();
-		System.out.print("전화번호를 입력해주세요 :  ");
-		orderer = sc.next();
+//		System.out.print("전화번호를 입력해주세요 :  ");
+//		orderer = sc.next();
+		orderer = new UserView(usercon).phoneNumberValidate();
+        if (orderer == null) {
+            return;
+        }
+        
+        // 회원인경우 환영문구 추가
+		if (usercon.getUser(orderer)!= null) {
+			name = usercon.getUser(orderer).getName();
+			System.out.println(name  + " 고객님 환영합니다."); 
+		}
 		
 
 		// 쿠폰이 있는 경우 쿠폰 사용할지 묻기
@@ -128,7 +145,13 @@ public class OrderController {
 					// Y입력 안하면 주문완료 문구 출력
 					// 현재 주문자의 정보를 추력하기 위해 객체 리스트 생성
 					List<OrderVO> orderList = od.searchOrderByNo(no);
-					System.out.println("주문이 완료되었습니다! "+ orderList.get(0).getOrderer() +" 님이 주문하신 내역은 다음과 같습니다.");	
+			        // 회원인경우 환영문구 추가
+					if (usercon.getUser(orderer)!= null) {
+						name = usercon.getUser(orderer).getName();
+						System.out.println("주문이 완료되었습니다! "+ name +" 님이 주문하신 내역은 다음과 같습니다.");	
+					}else {
+							System.out.println("주문이 완료되었습니다! "+ orderList.get(0).getOrderer() +" 님이 주문하신 내역은 다음과 같습니다.");	
+					}
 					System.out.println("============ 주 문 내 역 ============= 주문번호 : "+ no +" ========");
 					for(OrderVO print : orderList) {
 						if(order != null){
@@ -158,15 +181,20 @@ public class OrderController {
 					System.out.println("결제하시겠습니까? Y/N :  ");
 					char ys3 = sc.next().charAt(0);
 					if(ys3 == 'Y') {
+						
 						System.out.println("결제가 완료되었습니다. 감사합니다 ^_^ 음료는 픽업대에서 받아가세요~");
 						no++;
+						if (usercon.getUser(orderer) == null) {
+							// 주문 완료 후 회원이 아니면 회원추가
+							usercon.addUser(new UserVO(orderer,"익명",LocalDate.now())) ;
+							usercon.findAllByUser();
+						}
 						break label;
 						
 					} else {
 						// Y입력 안하면 주문이 취소되고 현재 정보가 배열에서 삭제됨
 						System.out.println("주문이 취소되었습니다.");
 						od.deleteOrderByNo(no);
-						selectAll();
 						break;
 							}
 				}

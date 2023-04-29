@@ -34,24 +34,30 @@ public class CouponVO {
         return coupon;
     }
 
-    public void setCoupon(String coupon) {
+    public CouponVO setCoupon(String coupon) {
         this.coupon = coupon;
+        return this;
     }
 
     public LocalDateTime getExpDate() {
         return expDate;
     }
 
-    public void setExpDate(LocalDateTime expDate) {
+    public CouponVO setExpDate(LocalDateTime expDate) {
         this.expDate = expDate;
+        return this;
     }
 
     public boolean getAvailable() {
         return available;
     }
 
-    public void setAvailable(boolean available) {
+    public CouponVO setAvailable(boolean available) {
         this.available = available;
+        return this;
     }
 
+    public CouponVO build() {
+        return new CouponVO(coupon, expDate, available);
+    }
 }

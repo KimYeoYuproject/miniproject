@@ -18,7 +18,12 @@ public class TestYeo {
     	
     	ClearConsole.clear();
     	MainView main = new MainView();
-    	main.mainView();
+    	try {
+			main.mainView();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 //    	while (true) {
 //    		System.out.println();

@@ -1,22 +1,22 @@
 package View.Testview;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import Controller.CouponController;
-import Controller.MenuController;
-import DTO.OrderDTO;
-import View.AdminView;
 import View.ClearConsole;
 
 public class TestYu {
     private CouponController couponController = new CouponController();
-    private MenuController menuController = new MenuController();
-    private OrderDTO orderDTO = new OrderDTO();
+    /*
+     * private MenuController menuController = new MenuController();
+     * private UserController userController = new UserController();
+     * private OrderDTO orderDTO = new OrderDTO();
+     */
 
     private Scanner sc = new Scanner(System.in);
 
     public void view() {
+
         ClearConsole.clear();
         couponController.couponGenerate(10, 20);
         int number = 0;
@@ -31,12 +31,15 @@ public class TestYu {
             sc.nextLine();
             switch (number) {
                 case 1:
-                    try {
-                        new AdminView(couponController, menuController, orderDTO).adminView();
-                    } catch (IOException e) {
-                        System.out.println("오류가 발생했습니다.");
-                        e.printStackTrace();
-                    }
+                    /*
+                     * try {
+                     * new AdminView(couponController, menuController, orderDTO,
+                     * userController).adminView();
+                     * } catch (IOException e) {
+                     * System.out.println("오류가 발생했습니다.");
+                     * e.printStackTrace();
+                     * }
+                     */
                 case 9:
                     break label;
                 default:

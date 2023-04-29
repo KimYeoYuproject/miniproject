@@ -1,11 +1,11 @@
 package View;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
+import Controller.UserController;
 import DTO.OrderDTO;
 
 /**
@@ -15,19 +15,21 @@ public class AdminView {
 
     private CouponController couponController;
     private MenuController menuController;
+    private UserController userController;
     private OrderDTO orderDTO;
 
     private Scanner sc = new Scanner(System.in);
     private int number;
 
     public AdminView(CouponController couponController, MenuController menuController,
-            OrderDTO orderDTO) {
+            OrderDTO orderDTO, UserController userController) {
         this.couponController = couponController;
         this.menuController = menuController;
         this.orderDTO = orderDTO;
+        this.userController = userController;
     }
 
-    public void adminView() throws IOException {
+    public void adminView() {
         try {
             label: while (true) {
                 ClearConsole.clear();
@@ -45,9 +47,9 @@ public class AdminView {
                 switch (number) {
                     case 1:
                         new CoffeMenuView(this.menuController).coffeMenu();
-
                         break;
                     case 2:
+                        new UserView(this.userController).userView();
                         break;
                     case 3:
                         new CouponView(this.couponController).couponView();
