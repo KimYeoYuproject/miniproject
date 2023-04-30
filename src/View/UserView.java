@@ -7,6 +7,10 @@ import java.util.Scanner;
 import Controller.UserController;
 import Model.UserVO;
 
+/**
+ * @author yoosc89
+ *         관리자 - 계정 관리 페이지
+ */
 public class UserView {
     private UserController userController;
 

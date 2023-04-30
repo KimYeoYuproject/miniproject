@@ -10,6 +10,10 @@ import DTO.OrderDTO;
 import Model.MenuVO;
 import Model.OrderVO;
 
+/**
+ * @author yoosc89
+ *         관리자 주문 관리 페이지
+ */
 public class AdminOrderView {
 
     private OrderDTO orderDTO;

@@ -8,6 +8,9 @@ import Controller.OrderController;
 import Controller.UserController;
 import DTO.OrderDTO;
 
+/**
+ * @author miji
+ */
 public class MainView {
 	private OrderDTO orderDto = new OrderDTO();
 
@@ -16,7 +19,7 @@ public class MainView {
 	private MenuController menuController = new MenuController();
 	private UserController userController = new UserController();
 	private UserView userView = new UserView(userController);
-	private OrderController order = new OrderController(orderDto,userController);
+	private OrderController order = new OrderController(orderDto, userController);
 	private Scanner sc = new Scanner(System.in);
 
 	public void mainView() throws Exception {

@@ -5,6 +5,10 @@ import java.util.Scanner;
 import Controller.CouponController;
 import View.ClearConsole;
 
+/**
+ * @author yoosc89
+ * 
+ */
 public class TestYu {
     private CouponController couponController = new CouponController();
     /*

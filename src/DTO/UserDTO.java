@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import Model.UserVO;
 
+/**
+ * @author minjihi
+ */
 public class UserDTO {
 
 	// UserVO 객체 배열 필드 변수

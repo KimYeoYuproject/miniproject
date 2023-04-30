@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author yoosc89
+ *         공부용 코드
+ */
 public class UserDTO {
 
     private List<UserVO> userVO = new ArrayList<>();

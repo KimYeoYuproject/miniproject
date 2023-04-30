@@ -11,6 +11,10 @@ import Model.MenuVO;
 import Model.OrderVO;
 import View.CouponView;
 
+/**
+ * @author yoosc89
+ *         공부용 코드
+ */
 public class OrderViewTest {
 
 	private MenuController menulist = new MenuController();

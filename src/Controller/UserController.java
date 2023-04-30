@@ -5,6 +5,9 @@ import java.util.List;
 import DTO.UserDTO;
 import Model.UserVO;
 
+/**
+ * @author minjihi
+ */
 public class UserController {
 
 	// UserDTO 필드 변수

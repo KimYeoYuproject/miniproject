@@ -140,7 +140,10 @@ public class CouponController {
     public void wirteCsvToCoupon() {
 
         File mkdirs = new File("./static/output/coupon");
-        mkdirs.mkdirs();
+        if (!mkdirs.exists()) {
+            System.out.println("폴더 생성");
+            mkdirs.mkdirs();
+        }
 
         String fileName = "coupon";
         String fileExt = ".csv";
@@ -165,7 +168,8 @@ public class CouponController {
                 bw.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("파일 및 폴더를 찾을 찾을 수 없습니다.");
+
         } finally {
             if (bw != null) {
                 try {

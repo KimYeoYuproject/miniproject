@@ -6,6 +6,10 @@ import java.util.List;
 import Model.CouponVO;
 import Model.MenuVO;
 
+/**
+ * @author yoosc89
+ *         공부용 코드
+ */
 public class UserVO {
 
     private String phoneNumber;

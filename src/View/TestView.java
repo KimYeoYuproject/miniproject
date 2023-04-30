@@ -6,6 +6,9 @@ import View.Testview.TestKim;
 import View.Testview.TestYeo;
 import View.Testview.TestYu;
 
+/**
+ * @author yoosc89
+ */
 public class TestView {
 
     Scanner sc = new Scanner(System.in);
