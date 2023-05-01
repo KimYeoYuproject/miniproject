@@ -2,6 +2,7 @@ package View;
 
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -77,8 +78,9 @@ public class AdminOrderView {
     }
 
     public void findAllByOrder() {
-        orderDTO.selectAll().sort(Comparator.comparing(OrderVO::getNo));
-        orderDTO.selectAll().forEach(System.out::println);
+        List<OrderVO> orderVO = orderDTO.selectAll().stream().toList();
+        orderVO.sort(Comparator.comparing(OrderVO::getNo));
+        orderVO.forEach(System.out::println);
     }
 
     public OrderVO randemOrderGenerator() {

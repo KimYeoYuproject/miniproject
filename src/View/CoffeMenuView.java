@@ -66,7 +66,8 @@ public class CoffeMenuView {
 
     public void findAllByMenu() {
         try {
-            List<MenuVO> menuList = this.menuController.findAllByMenu();
+
+            List<MenuVO> menuList = this.menuController.findAllByMenu().stream().toList();
             System.out.println("===== 정렬 방법 선택 =====");
             System.out.println("1.메뉴이름(ASC)");
             System.out.println("2.메뉴이름(DESC)");
@@ -141,7 +142,7 @@ public class CoffeMenuView {
 
     public void modifyByMenu() throws InputMismatchException {
 
-        List<MenuVO> menuList = this.menuController.findAllByMenu();
+        List<MenuVO> menuList = this.menuController.findAllByMenu().stream().toList();
 
         int number = 0;
 
@@ -195,8 +196,9 @@ public class CoffeMenuView {
 
         ClearConsole.clear();
 
-        List<MenuVO> menuList = new ArrayList<>();
-        menuList = this.menuController.categoryFindAllbyMenu(categoryList.get(number));
+        List<MenuVO> menuList = this.menuController
+                .categoryFindAllbyMenu(categoryList.get(number))
+                .stream().toList();
 
         menuList.forEach(System.out::println);
 
