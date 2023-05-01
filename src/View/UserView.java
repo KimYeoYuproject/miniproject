@@ -45,7 +45,7 @@ public class UserView {
         }
 
         UserVO userVO = userController.getUser(phoneNumber);
-        System.out.println(userVO);
+        System.out.println(userVO.toString());
     }
 
     public void findAllByUser() {

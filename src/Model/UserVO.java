@@ -50,4 +50,11 @@ public class UserVO {
 		this.createDate = createDate;
 	}
 
+	@Override
+	public String toString() {
+		return "[연락처 : " + phone + ", 이름 : " + name + ", 생성일자 : " + createDate + "]";
+	}
+	
+	
+
 }
