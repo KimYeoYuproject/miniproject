@@ -29,7 +29,6 @@ public class CouponView {
     }
 
     public void findAllCoupon() {
-
         this.controller.findAllByCounpon().forEach(System.out::println);
     }
 
