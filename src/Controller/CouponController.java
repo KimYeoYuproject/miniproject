@@ -110,7 +110,7 @@ public class CouponController {
      */
     public boolean availableCoupon(String coupon) {
         boolean result = false;
-        CouponVO getCoupon = this.couponDTO.findByCoupon(coupon).orElse(null);
+        CouponVO getCoupon = this.couponDTO.findByCoupon(coupon).orElse(null).build();
         try {
             if (getCoupon.getExpDate().isAfter(LocalDateTime.now())
                     && getCoupon.getAvailable() == true) {
@@ -129,7 +129,7 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      */
     public void useCoupon(String coupon) {
-        CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null);
+        CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null).build();
         couponVO.setAvailable(false);
         this.couponDTO.modifyByCoupon(couponVO);
     }

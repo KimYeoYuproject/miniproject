@@ -177,8 +177,7 @@ public class CoffeMenuView {
                 .setName(name == "" ? menuList.get(number).getName() : name)
                 .setCategory(category == "" ? menuList.get(number).getCategory() : category)
                 .setPrice(price == 0 ? menuList.get(number).getPrice() : price)
-                .setCreateDate(menuList.get(number).getCreateDate())
-                .build();
+                .setCreateDate(menuList.get(number).getCreateDate());
 
         this.menuController.modifyByMenu(menuList.get(number), menuVO);
     }

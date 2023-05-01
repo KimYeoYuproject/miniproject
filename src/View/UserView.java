@@ -78,7 +78,7 @@ public class UserView {
             return;
         }
         UserVO userVO = userController.getUser(phoneNumber);
-        UserVO updateUserVO = userController.getUser(phoneNumber);
+        UserVO updateUserVO = new UserVO();
 
         while (true) {
             ClearConsole.clear();
