@@ -47,8 +47,6 @@ public class CouponDTO {
     public void modifyByCoupon(CouponVO couponVO) {
         for (int i = 0; i < this.coupons.size(); i++) {
             if (this.coupons.get(i).getCoupon().equals(couponVO.getCoupon())) {
-                System.out.println(this.coupons.get(i).hashCode());
-                System.out.println(couponVO.hashCode());
                 this.coupons.get(i)
                         .setCoupon(couponVO.getCoupon())
                         .setExpDate(couponVO.getExpDate())
