@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.UserController;
-import DTO.OrderDTO;
+import DAO.OrderDAO;
 import Model.OrderVO;
 import Model.UserVO;
 import View.ClearConsole;
@@ -61,8 +61,8 @@ public class TestKim {
 				System.out.println("반갑습니다! " + userVo.getName() + "님!");
 
 				System.out.println("최근 주문 목록");
-				OrderDTO orderDto = new OrderDTO();
-				List<OrderVO> orderList = orderDto.searchOrderByOrderer(phone);
+				OrderDAO orderDAO = new OrderDAO();
+				List<OrderVO> orderList = orderDAO.searchOrderByOrderer(phone);
 
 				for (int i = 0; i < orderList.size(); i++) {
 
