@@ -6,20 +6,20 @@ import Controller.CouponController;
 import Controller.MenuController;
 import Controller.OrderController;
 import Controller.UserController;
-import DTO.OrderDTO;
+import DAO.OrderDAO;
 
 /**
  * @author miji
  */
 public class MainView {
-	private OrderDTO orderDto = new OrderDTO();
+	private OrderDAO orderDAO = new OrderDAO();
 
-	private AdminOrderView admorder = new AdminOrderView(orderDto);
+	private AdminOrderView admorder = new AdminOrderView(orderDAO);
 	private CouponController couponController = new CouponController();
 	private MenuController menuController = new MenuController();
 	private UserController userController = new UserController();
 	private UserView userView = new UserView(userController);
-	private OrderController order = new OrderController(orderDto, userController);
+	private OrderController order = new OrderController(orderDAO, userController);
 	private Scanner sc = new Scanner(System.in);
 
 	public void mainView() throws Exception {
@@ -61,7 +61,7 @@ public class MainView {
 					userView.userView();
 					break;
 				case 4:
-					new AdminView(couponController, menuController, orderDto, userController).adminView();
+					new AdminView(couponController, menuController, orderDAO, userController).adminView();
 					break;
 				case 9:
 					System.out.println("시스템을 종료합니다.");

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import Controller.CouponController;
 import Controller.MenuController;
 import Controller.UserController;
-import DTO.OrderDTO;
+import DAO.OrderDAO;
 
 /**
  * @author yoosc89
@@ -16,16 +16,16 @@ public class AdminView {
     private CouponController couponController;
     private MenuController menuController;
     private UserController userController;
-    private OrderDTO orderDTO;
+    private OrderDAO orderDAO;
 
     private Scanner sc = new Scanner(System.in);
     private int number;
 
     public AdminView(CouponController couponController, MenuController menuController,
-            OrderDTO orderDTO, UserController userController) {
+            OrderDAO OrderDAO, UserController userController) {
         this.couponController = couponController;
         this.menuController = menuController;
-        this.orderDTO = orderDTO;
+        this.orderDAO = OrderDAO;
         this.userController = userController;
     }
 
@@ -55,7 +55,7 @@ public class AdminView {
                         new CouponView(this.couponController).couponView();
                         break;
                     case 4:
-                        new AdminOrderView(this.orderDTO).adminOrderView();
+                        new AdminOrderView(this.orderDAO).adminOrderView();
                         break;
                     case 9:
                         System.out.println("관리자 메뉴 종료 합니다");

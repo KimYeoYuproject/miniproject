@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Controller.CouponController;
 import Controller.MenuController;
-import DTO.OrderDTO;
+import DAO.OrderDAO;
 import Model.MenuVO;
 import Model.OrderVO;
 import View.CouponView;
@@ -21,7 +21,7 @@ public class OrderViewTest {
 	private CouponController couponcon = new CouponController();
 	private CouponView couponlist = new CouponView(couponcon);
 
-	private OrderDTO od = new OrderDTO();
+	private OrderDAO od = new OrderDAO();
 	private Scanner sc = new Scanner(System.in);
 	private int no = 1; // 주문번호는 1번부터 시작하여 새로운 주문건 마다 1씩 늘어나도록 하기
 

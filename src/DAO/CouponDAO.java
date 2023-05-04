@@ -1,4 +1,4 @@
-package DTO;
+package DAO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import Model.CouponVO;
 /**
  * @author yoosc89
  */
-public class CouponDTO {
+public class CouponDAO {
 
     List<CouponVO> coupons = new ArrayList<>();
 

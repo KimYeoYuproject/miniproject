@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
-import DTO.CouponDTO;
+import DAO.CouponDAO;
 import Model.CouponVO;
 
 /**
@@ -19,7 +19,7 @@ import Model.CouponVO;
 public class CouponController {
 
     private Random random = new Random();
-    private CouponDTO couponDTO = new CouponDTO();
+    private CouponDAO couponDAO = new CouponDAO();
 
     /**
      * 쿠폰 생성기
@@ -53,7 +53,7 @@ public class CouponController {
             String newCoupon = randomCouponGenerator(length);
             System.out.println(newCoupon);
             if (existCoupon(newCoupon) == false) {
-                this.couponDTO.saveByCoupon(newCoupon);
+                this.couponDAO.saveByCoupon(newCoupon);
             } else {
                 number--;
             }
@@ -67,7 +67,7 @@ public class CouponController {
      * @return
      */
     public boolean existCoupon(String coupon) {
-        return this.couponDTO.findByCoupon(
+        return this.couponDAO.findByCoupon(
                 coupon.toUpperCase()).orElse(null) != null ? true : false;
     }
 
@@ -78,7 +78,7 @@ public class CouponController {
      * @return
      */
     public CouponVO findByCoupon(String coupon) {
-        return this.couponDTO.findByCoupon(coupon)
+        return this.couponDAO.findByCoupon(coupon)
                 .orElse(null);
     }
 
@@ -88,7 +88,7 @@ public class CouponController {
      * @return
      */
     public List<CouponVO> findAllByCounpon() {
-        return this.couponDTO.findAllByCoupon();
+        return this.couponDAO.findAllByCoupon();
     }
 
     /**
@@ -98,7 +98,7 @@ public class CouponController {
      * @return
      */
     public boolean deleteCoupon(String coupon) {
-        return this.couponDTO.deleteByCoupon(coupon.toUpperCase());
+        return this.couponDAO.deleteByCoupon(coupon.toUpperCase());
     }
 
     /**
@@ -110,7 +110,7 @@ public class CouponController {
      */
     public boolean availableCoupon(String coupon) {
         boolean result = false;
-        CouponVO getCoupon = this.couponDTO.findByCoupon(coupon).orElse(null).build();
+        CouponVO getCoupon = this.couponDAO.findByCoupon(coupon).orElse(null).build();
         try {
             if (getCoupon.getExpDate().isAfter(LocalDateTime.now())
                     && getCoupon.getAvailable() == true) {
@@ -129,9 +129,9 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      */
     public void useCoupon(String coupon) {
-        CouponVO couponVO = couponDTO.findByCoupon(coupon.toUpperCase()).orElse(null).build();
+        CouponVO couponVO = couponDAO.findByCoupon(coupon.toUpperCase()).orElse(null).build();
         couponVO.setAvailable(false);
-        this.couponDTO.modifyByCoupon(couponVO);
+        this.couponDAO.modifyByCoupon(couponVO);
     }
 
     /**
@@ -161,7 +161,7 @@ public class CouponController {
             bw.write("쿠폰번호,유효기간,사용가능");
             bw.newLine();
 
-            for (CouponVO c : this.couponDTO.findAllByCoupon()) {
+            for (CouponVO c : this.couponDAO.findAllByCoupon()) {
                 bw.write(c.getCoupon() +
                         "," + c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
                         + "," + (c.getAvailable() ? "가능" : "불가능"));

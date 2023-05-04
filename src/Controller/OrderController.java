@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import DTO.OrderDTO;
+import DAO.OrderDAO;
 import Model.MenuVO;
 import Model.OrderVO;
 import Model.UserVO;
@@ -24,14 +24,14 @@ public class OrderController {
 	CouponController couponcon = new CouponController();
 	CouponView couponlist = new CouponView(couponcon);
 
-	private OrderDTO od;
+	private OrderDAO od;
 	private UserController usercon;
 	private Scanner sc = new Scanner(System.in);
 	private java.util.Date today = new java.util.Date();
 	private int no = 1; // 주문번호는 1번부터 시작하여 새로운 주문건 마다 1씩 늘어나도록 하기
 	private Date date = today; // 주문일자를 현재시간으로 저장해줌
 
-	public OrderController(OrderDTO od, UserController usercon) {
+	public OrderController(OrderDAO od, UserController usercon) {
 
 		this.od = od;
 		this.usercon = usercon;

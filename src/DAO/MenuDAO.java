@@ -1,4 +1,4 @@
-package DTO;
+package DAO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import Model.MenuVO;
 /**
  * @author yoosc89
  */
-public class MenuDTO {
+public class MenuDAO {
     private List<MenuVO> menuVO = new ArrayList<>();
 
     {

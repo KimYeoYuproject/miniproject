@@ -1,4 +1,4 @@
-package DTO;
+package DAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import Model.UserVO;
 /**
  * @author minjihi
  */
-public class UserDTO {
+public class UserDAO {
 
 	// UserVO 객체 배열 필드 변수
 	List<UserVO> userList = new ArrayList<>();

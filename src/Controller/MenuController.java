@@ -3,7 +3,7 @@ package Controller;
 import java.util.List;
 import java.util.Set;
 
-import DTO.MenuDTO;
+import DAO.MenuDAO;
 import Model.MenuVO;
 
 /**
@@ -11,7 +11,7 @@ import Model.MenuVO;
  */
 public class MenuController {
 
-    private MenuDTO menuDTO = new MenuDTO();
+    private MenuDAO menuDAO = new MenuDAO();
 
     /**
      * 메뉴 저장
@@ -20,8 +20,8 @@ public class MenuController {
      * @return
      */
     public boolean saveByMenu(MenuVO menu) {
-        if (this.menuDTO.findByMenu(menu.getName()) == null) {
-            this.menuDTO.saveByMenu(menu);
+        if (this.menuDAO.findByMenu(menu.getName()) == null) {
+            this.menuDAO.saveByMenu(menu);
             return true;
         }
         return false;
@@ -36,7 +36,7 @@ public class MenuController {
     public boolean modifyByMenu(MenuVO oldMenu, MenuVO newMenu) {
         MenuVO menuVO = findByMenu(oldMenu.getName());
         if (menuVO != null) {
-            return this.menuDTO.modifyByMenu(oldMenu, newMenu);
+            return this.menuDAO.modifyByMenu(oldMenu, newMenu);
         }
         return false;
     }
@@ -48,7 +48,7 @@ public class MenuController {
      * @return
      */
     public MenuVO findByMenu(String menuName) {
-        return this.menuDTO.findByMenu(menuName).orElse(null);
+        return this.menuDAO.findByMenu(menuName).orElse(null);
     }
 
     /**
@@ -57,7 +57,7 @@ public class MenuController {
      * @return
      */
     public List<MenuVO> findAllByMenu() {
-        return this.menuDTO.findAllByMenu();
+        return this.menuDAO.findAllByMenu();
 
     }
 
@@ -68,7 +68,7 @@ public class MenuController {
      * @return
      */
     public List<MenuVO> categoryFindAllbyMenu(String category) {
-        return menuDTO.findAllByMenu()
+        return menuDAO.findAllByMenu()
                 .stream()
                 .filter(menuVO -> menuVO.getCategory().equals(category))
                 .toList();
@@ -84,7 +84,7 @@ public class MenuController {
         if (findByMenu(menuName) == null) {
             return false;
         }
-        return this.menuDTO.deleteByMenu(menuName);
+        return this.menuDAO.deleteByMenu(menuName);
     }
 
     /**
@@ -93,7 +93,7 @@ public class MenuController {
      * @return
      */
     public boolean deleteAllBymenu() {
-        return this.menuDTO.deleteAllBymenu();
+        return this.menuDAO.deleteAllBymenu();
     }
 
     /**
@@ -102,7 +102,7 @@ public class MenuController {
      * @return
      */
     public Set<String> findAllCategory() {
-        return this.menuDTO.findAllCategory();
+        return this.menuDAO.findAllCategory();
     }
 
 }

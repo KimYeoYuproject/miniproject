@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import DTO.MenuDTO;
-import DTO.OrderDTO;
+import DAO.MenuDAO;
+import DAO.OrderDAO;
 import Model.MenuVO;
 import Model.OrderVO;
 
@@ -17,12 +17,12 @@ import Model.OrderVO;
  */
 public class AdminOrderView {
 
-    private OrderDTO orderDTO;
+    private OrderDAO orderDAO;
     private Scanner sc = new Scanner(System.in);
     private Random random = new Random();
 
-    public AdminOrderView(OrderDTO orderDTO) {
-        this.orderDTO = orderDTO;
+    public AdminOrderView(OrderDAO OrderDAO) {
+        this.orderDAO = OrderDAO;
     }
 
     public void adminOrderView() {
@@ -68,25 +68,25 @@ public class AdminOrderView {
     public void findByOrderNumber() {
         System.out.println("주문번호를 입력하세요 : ");
         int number = sc.nextInt();
-        orderDTO.searchOrderByNo(number).forEach(System.out::println);
+        orderDAO.searchOrderByNo(number).forEach(System.out::println);
     }
 
     public void findByOrderUser() {
         System.out.println("핸드폰 번호를 입력하세요 : ");
         String phoneNumber = sc.nextLine();
-        orderDTO.searchOrderByOrderer(phoneNumber).forEach(System.out::println);
+        orderDAO.searchOrderByOrderer(phoneNumber).forEach(System.out::println);
     }
 
     public void findAllByOrder() {
-        List<OrderVO> orderVO = orderDTO.selectAll().stream().toList();
+        List<OrderVO> orderVO = orderDAO.selectAll().stream().toList();
         orderVO.sort(Comparator.comparing(OrderVO::getNo));
         orderVO.forEach(System.out::println);
     }
 
     public OrderVO randemOrderGenerator() {
-        int index = random.nextInt(new MenuDTO().findAllByMenu().size());
+        int index = random.nextInt(new MenuDAO().findAllByMenu().size());
         boolean usedCoupon = random.nextBoolean();
-        MenuVO menuVO = new MenuDTO().findAllByMenu().get(index);
+        MenuVO menuVO = new MenuDAO().findAllByMenu().get(index);
         StringBuilder stringBuilder = new StringBuilder("010");
         for (int j = 0; j < 8; j++) {
             int c = random.nextInt(10) + 48;
@@ -101,7 +101,7 @@ public class AdminOrderView {
     public void saveByOrder() {
 
         for (int i = 0; i < 20; i++) {
-            orderDTO.insertOrder(randemOrderGenerator());
+            orderDAO.insertOrder(randemOrderGenerator());
         }
 
     }
@@ -110,6 +110,6 @@ public class AdminOrderView {
         findAllByOrder();
         System.out.println("삭제할 주문번호를 입력하세요 : ");
         int number = sc.nextInt();
-        orderDTO.deleteOrderByNo(number);
+        orderDAO.deleteOrderByNo(number);
     }
 }
