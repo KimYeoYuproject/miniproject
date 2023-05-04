@@ -7,8 +7,8 @@ import java.util.Scanner;
 import Controller.CouponController;
 import Controller.MenuController;
 import DAO.OrderDAO;
-import Model.MenuVO;
-import Model.OrderVO;
+import Model.MenuDTO;
+import Model.OrderDTO;
 import View.CouponView;
 
 /**
@@ -32,7 +32,7 @@ public class OrderViewTest {
 
 		String order = userValidate();
 		boolean usedCoupon = couponConfirm();
-		MenuVO selectMenu;
+		MenuDTO selectMenu;
 		double priceSum = 0.0;
 
 		while (true) {
@@ -85,8 +85,8 @@ public class OrderViewTest {
 		return orderer;
 	}
 
-	public MenuVO selectMenu() {
-		List<MenuVO> menulist2 = menulist.findAllByMenu();
+	public MenuDTO selectMenu() {
+		List<MenuDTO> menulist2 = menulist.findAllByMenu();
 		int selectmenu;
 		while (true) {
 			System.out.println("================= 메  뉴 =====================");
@@ -109,23 +109,23 @@ public class OrderViewTest {
 		}
 	}
 
-	public void createOrder(int orderNum, MenuVO menu,
+	public void createOrder(int orderNum, MenuDTO menu,
 			String orderer, boolean usedCoupon) {
-		OrderVO orderVO = new OrderVO(orderNum, orderer,
+		OrderDTO orderVO = new OrderDTO(orderNum, orderer,
 				menu.getName(), menu.getPrice(),
 				new Date(), usedCoupon);
 		od.insertOrder(orderVO);
 	}
 
 	public double printOrder(int no) {
-		List<OrderVO> orderList = od.searchOrderByNo(no);
+		List<OrderDTO> orderList = od.searchOrderByNo(no);
 		double priceSum = 0.0;
 		System.out.println("주문이 완료되었습니다! "
 				+ orderList.get(0).getOrderer()
 				+ " 님이 주문하신 내역은 다음과 같습니다.");
 
 		System.out.println("====================== 주 문 내 역 =======================");
-		for (OrderVO order : orderList) {
+		for (OrderDTO order : orderList) {
 			System.out.println(order.Print());
 			priceSum += order.getPrice();
 		}

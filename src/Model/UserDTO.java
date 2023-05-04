@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * @author minjihi
  */
-public class UserVO {
+public class UserDTO {
 
 	// 핸드폰 번호 필드(필드변수)
 	private String phone;
@@ -15,11 +15,11 @@ public class UserVO {
 	private LocalDate createDate;
 
 	// 기본생성자
-	public UserVO() {
+	public UserDTO() {
 	}
 
 	// 매개변수(핸드폰번호,이름,생성날짜) 있는 생성자
-	public UserVO(String phone, String name, LocalDate createDate) {
+	public UserDTO(String phone, String name, LocalDate createDate) {
 		this.phone = phone;
 		this.name = name;
 		this.createDate = createDate;
@@ -54,7 +54,5 @@ public class UserVO {
 	public String toString() {
 		return "[연락처 : " + phone + ", 이름 : " + name + ", 생성일자 : " + createDate + "]";
 	}
-	
-	
 
 }

@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Controller.UserController;
-import Model.UserVO;
+import Model.UserDTO;
 
 /**
  * @author yoosc89
@@ -44,7 +44,7 @@ public class UserView {
             return;
         }
 
-        UserVO userVO = userController.getUser(phoneNumber);
+        UserDTO userVO = userController.getUser(phoneNumber);
         System.out.println(userVO.toString());
     }
 
@@ -66,7 +66,7 @@ public class UserView {
         System.out.print("회원 이름 : ");
         String name = sc.nextLine();
 
-        userController.addUser(new UserVO(phoneNumber, name, LocalDate.now()));
+        userController.addUser(new UserDTO(phoneNumber, name, LocalDate.now()));
         System.out.println("회원 추가 완료했습니다.");
     }
 
@@ -77,8 +77,8 @@ public class UserView {
         if (phoneNumber == null) {
             return;
         }
-        UserVO userVO = userController.getUser(phoneNumber);
-        UserVO updateUserVO = new UserVO();
+        UserDTO userVO = userController.getUser(phoneNumber);
+        UserDTO updateUserVO = new UserDTO();
 
         while (true) {
             ClearConsole.clear();

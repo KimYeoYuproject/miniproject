@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import DAO.CouponDAO;
-import Model.CouponVO;
+import Model.CouponDTO;
 
 /**
  * @author yoosc89
@@ -77,7 +77,7 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      * @return
      */
-    public CouponVO findByCoupon(String coupon) {
+    public CouponDTO findByCoupon(String coupon) {
         return this.couponDAO.findByCoupon(coupon)
                 .orElse(null);
     }
@@ -87,7 +87,7 @@ public class CouponController {
      * 
      * @return
      */
-    public List<CouponVO> findAllByCounpon() {
+    public List<CouponDTO> findAllByCounpon() {
         return this.couponDAO.findAllByCoupon();
     }
 
@@ -110,7 +110,7 @@ public class CouponController {
      */
     public boolean availableCoupon(String coupon) {
         boolean result = false;
-        CouponVO getCoupon = this.couponDAO.findByCoupon(coupon).orElse(null).build();
+        CouponDTO getCoupon = this.couponDAO.findByCoupon(coupon).orElse(null).build();
         try {
             if (getCoupon.getExpDate().isAfter(LocalDateTime.now())
                     && getCoupon.getAvailable() == true) {
@@ -129,7 +129,7 @@ public class CouponController {
      * @param coupon 쿠폰 번호
      */
     public void useCoupon(String coupon) {
-        CouponVO couponVO = couponDAO.findByCoupon(coupon.toUpperCase()).orElse(null).build();
+        CouponDTO couponVO = couponDAO.findByCoupon(coupon.toUpperCase()).orElse(null).build();
         couponVO.setAvailable(false);
         this.couponDAO.modifyByCoupon(couponVO);
     }
@@ -161,7 +161,7 @@ public class CouponController {
             bw.write("쿠폰번호,유효기간,사용가능");
             bw.newLine();
 
-            for (CouponVO c : this.couponDAO.findAllByCoupon()) {
+            for (CouponDTO c : this.couponDAO.findAllByCoupon()) {
                 bw.write(c.getCoupon() +
                         "," + c.getExpDate().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
                         + "," + (c.getAvailable() ? "가능" : "불가능"));

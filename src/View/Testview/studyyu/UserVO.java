@@ -3,8 +3,8 @@ package View.Testview.studyyu;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import Model.CouponVO;
-import Model.MenuVO;
+import Model.CouponDTO;
+import Model.MenuDTO;
 
 /**
  * @author yoosc89
@@ -16,9 +16,9 @@ public class UserVO {
 
     private String name;
 
-    private List<CouponVO> couponList;
+    private List<CouponDTO> couponList;
 
-    private List<MenuVO> favorites;
+    private List<MenuDTO> favorites;
 
     private LocalDateTime createDate;
 
@@ -26,7 +26,7 @@ public class UserVO {
     }
 
     public UserVO(String phoneNumber, String name,
-            List<CouponVO> couponList, List<MenuVO> favorites,
+            List<CouponDTO> couponList, List<MenuDTO> favorites,
             LocalDateTime createDate) {
         this.phoneNumber = phoneNumber;
         this.name = name;
@@ -57,19 +57,19 @@ public class UserVO {
         this.name = name;
     }
 
-    public List<CouponVO> getCouponList() {
+    public List<CouponDTO> getCouponList() {
         return couponList;
     }
 
-    public void setCouponList(List<CouponVO> couponList) {
+    public void setCouponList(List<CouponDTO> couponList) {
         this.couponList = couponList;
     }
 
-    public List<MenuVO> getFavorites() {
+    public List<MenuDTO> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(List<MenuVO> favorites) {
+    public void setFavorites(List<MenuDTO> favorites) {
         this.favorites = favorites;
     }
 

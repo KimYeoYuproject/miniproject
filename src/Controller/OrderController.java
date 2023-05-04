@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import DAO.OrderDAO;
-import Model.MenuVO;
-import Model.OrderVO;
-import Model.UserVO;
+import Model.MenuDTO;
+import Model.OrderDTO;
+import Model.UserDTO;
 import View.CouponView;
 import View.UserView;
 
@@ -91,7 +91,7 @@ public class OrderController {
 		label: while (true) {
 			System.out.println("================= 메  뉴 =====================");
 			// 메뉴 DTO에서 메뉴를 받아와서 화면에 뿌려줌
-			List<MenuVO> menulist2 = menulist.findAllByMenu();
+			List<MenuDTO> menulist2 = menulist.findAllByMenu();
 			for (int i = 0; i < menulist2.size(); i++) {
 				System.out.println(
 						i + 1 + "번 메뉴: " + menulist2.get(i).getName() + " " + menulist2.get(i).getPrice() + "원");
@@ -117,7 +117,7 @@ public class OrderController {
 			price = menulist.findByMenu(menu).getPrice();
 
 			// 입력받을 정보로 객체 셍성
-			OrderVO order = new OrderVO(no, orderer, menu, price, date, coupon);
+			OrderDTO order = new OrderDTO(no, orderer, menu, price, date, coupon);
 
 			// 생성된 객체를 배열에 저장해줌
 			od.insertOrder(order);
@@ -131,7 +131,7 @@ public class OrderController {
 
 				// Y입력 안하면 주문완료 문구 출력
 				// 현재 주문자의 정보를 추력하기 위해 객체 리스트 생성
-				List<OrderVO> orderList = od.searchOrderByNo(no);
+				List<OrderDTO> orderList = od.searchOrderByNo(no);
 				// 회원인경우 환영문구 추가
 				if (usercon.getUser(orderer) != null) {
 					name = usercon.getUser(orderer).getName();
@@ -140,7 +140,7 @@ public class OrderController {
 					System.out.println("주문이 완료되었습니다! " + orderList.get(0).getOrderer() + " 님이 주문하신 내역은 다음과 같습니다.");
 				}
 				System.out.println("============ 주 문 내 역 ============= 주문번호 : " + no + " ========");
-				for (OrderVO print : orderList) {
+				for (OrderDTO print : orderList) {
 					if (order != null) {
 						System.out.println(print.Print());
 					}
@@ -149,7 +149,7 @@ public class OrderController {
 
 				// 결제금액 출력
 				double priceSum = 0;
-				for (OrderVO print : orderList) {
+				for (OrderDTO print : orderList) {
 					if (order != null) {
 						priceSum += print.getPrice();
 					}
@@ -172,7 +172,7 @@ public class OrderController {
 					no++;
 					if (usercon.getUser(orderer) == null) {
 						// 주문 완료 후 회원이 아니면 회원추가
-						usercon.addUser(new UserVO(orderer, "익명", LocalDate.now()));
+						usercon.addUser(new UserDTO(orderer, "익명", LocalDate.now()));
 						usercon.findAllByUser();
 					}
 					break label;
@@ -192,7 +192,7 @@ public class OrderController {
 	// 주문 전체목록 불러오기
 	public void selectAll() {
 
-		List<OrderVO> orderList = od.selectAll();
+		List<OrderDTO> orderList = od.selectAll();
 		for (int i = 0; i < orderList.size(); i++) {
 			System.out.println(i + "번주문 : " + orderList.get(i));
 		}
@@ -203,9 +203,9 @@ public class OrderController {
 		System.out.print("주문번호를 입력하세요");
 		int no = sc.nextInt();
 
-		List<OrderVO> orderList = od.searchOrderByNo(no);
+		List<OrderDTO> orderList = od.searchOrderByNo(no);
 
-		for (OrderVO order : orderList) {
+		for (OrderDTO order : orderList) {
 			if (order != null) {
 				System.out.println(order);
 			}
@@ -217,9 +217,9 @@ public class OrderController {
 		System.out.println("고객번호를 입력하세요");
 		String orderer = sc.next();
 
-		List<OrderVO> orderList = od.searchOrderByOrderer(orderer);
+		List<OrderDTO> orderList = od.searchOrderByOrderer(orderer);
 
-		for (OrderVO order : orderList) {
+		for (OrderDTO order : orderList) {
 			if (order != null) {
 				System.out.println(order);
 			}

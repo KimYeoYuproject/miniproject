@@ -7,8 +7,8 @@ import java.util.Scanner;
 import Controller.CouponController;
 import Controller.UserController;
 import DAO.OrderDAO;
-import Model.OrderVO;
-import Model.UserVO;
+import Model.OrderDTO;
+import Model.UserDTO;
 import View.ClearConsole;
 
 /**
@@ -41,7 +41,7 @@ public class TestKim {
 				System.out.print("연락처 : ");
 				String phone = sc.next();
 
-				UserVO userVo = new UserVO(phone, name, LocalDate.now());
+				UserDTO userVo = new UserDTO(phone, name, LocalDate.now());
 
 				userController.addUser(userVo);
 
@@ -51,7 +51,7 @@ public class TestKim {
 				System.out.print("연락처 : ");
 				String phone = sc.next();
 
-				UserVO userVo = userController.getUser(phone);
+				UserDTO userVo = userController.getUser(phone);
 
 				if (userVo == null) {
 					System.out.println("해당하는 고객이 없습니다");
@@ -62,7 +62,7 @@ public class TestKim {
 
 				System.out.println("최근 주문 목록");
 				OrderDAO orderDAO = new OrderDAO();
-				List<OrderVO> orderList = orderDAO.searchOrderByOrderer(phone);
+				List<OrderDTO> orderList = orderDAO.searchOrderByOrderer(phone);
 
 				for (int i = 0; i < orderList.size(); i++) {
 
@@ -79,8 +79,8 @@ public class TestKim {
 				String phone = sc.next();
 				System.out.println();
 
-				UserVO userVo = userController.getUser(phone);
-				UserVO newUserVo = new UserVO(userVo.getPhone(), userVo.getName(), userVo.getCreateDate());
+				UserDTO userVo = userController.getUser(phone);
+				UserDTO newUserVo = new UserDTO(userVo.getPhone(), userVo.getName(), userVo.getCreateDate());
 
 				System.out.print("이름을 수정하시겠습니까? Y/N");
 				String nameYN = sc.next();
@@ -115,7 +115,7 @@ public class TestKim {
 
 			} else if (input == 4) {
 
-				UserVO userVo = new UserVO();
+				UserDTO userVo = new UserDTO();
 
 				System.out.println("=====회원탈퇴=====");
 				System.out.print("이름 : ");

@@ -7,7 +7,7 @@ import java.util.Date;
  * @author miji
  *         주문내역 정보를 담을 객체 생성
  */
-public class OrderVO {
+public class OrderDTO {
 
 	private int no; // 주문번호
 	private String orderer; // 주문자
@@ -32,11 +32,11 @@ public class OrderVO {
 	}
 
 	// 기본생성자
-	public OrderVO() {
+	public OrderDTO() {
 	}
 
 	// 모든객체 초기화 가능한 생성자
-	public OrderVO(int no, String orderer, String menu, int price, Date date, boolean coupon) {
+	public OrderDTO(int no, String orderer, String menu, int price, Date date, boolean coupon) {
 		super();
 		this.no = no;
 		this.orderer = orderer;

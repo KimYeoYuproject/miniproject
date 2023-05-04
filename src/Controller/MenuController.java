@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import DAO.MenuDAO;
-import Model.MenuVO;
+import Model.MenuDTO;
 
 /**
  * @author yoosc89
@@ -19,7 +19,7 @@ public class MenuController {
      * @param menu 메뉴 객체
      * @return
      */
-    public boolean saveByMenu(MenuVO menu) {
+    public boolean saveByMenu(MenuDTO menu) {
         if (this.menuDAO.findByMenu(menu.getName()) == null) {
             this.menuDAO.saveByMenu(menu);
             return true;
@@ -33,8 +33,8 @@ public class MenuController {
      * @param menu
      * @return
      */
-    public boolean modifyByMenu(MenuVO oldMenu, MenuVO newMenu) {
-        MenuVO menuVO = findByMenu(oldMenu.getName());
+    public boolean modifyByMenu(MenuDTO oldMenu, MenuDTO newMenu) {
+        MenuDTO menuVO = findByMenu(oldMenu.getName());
         if (menuVO != null) {
             return this.menuDAO.modifyByMenu(oldMenu, newMenu);
         }
@@ -47,7 +47,7 @@ public class MenuController {
      * @param menuName
      * @return
      */
-    public MenuVO findByMenu(String menuName) {
+    public MenuDTO findByMenu(String menuName) {
         return this.menuDAO.findByMenu(menuName).orElse(null);
     }
 
@@ -56,7 +56,7 @@ public class MenuController {
      * 
      * @return
      */
-    public List<MenuVO> findAllByMenu() {
+    public List<MenuDTO> findAllByMenu() {
         return this.menuDAO.findAllByMenu();
 
     }
@@ -67,7 +67,7 @@ public class MenuController {
      * @param category 출력할 카테고리
      * @return
      */
-    public List<MenuVO> categoryFindAllbyMenu(String category) {
+    public List<MenuDTO> categoryFindAllbyMenu(String category) {
         return menuDAO.findAllByMenu()
                 .stream()
                 .filter(menuVO -> menuVO.getCategory().equals(category))

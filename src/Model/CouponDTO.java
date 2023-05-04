@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author yoosc89
  */
-public class CouponVO {
+public class CouponDTO {
 
     private String coupon;
 
@@ -14,13 +14,13 @@ public class CouponVO {
 
     private boolean available = true;
 
-    public CouponVO(String coupon, LocalDateTime expDate, boolean available) {
+    public CouponDTO(String coupon, LocalDateTime expDate, boolean available) {
         this.coupon = coupon;
         this.expDate = expDate;
         this.available = available;
     }
 
-    public CouponVO() {
+    public CouponDTO() {
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CouponVO {
         return coupon;
     }
 
-    public CouponVO setCoupon(String coupon) {
+    public CouponDTO setCoupon(String coupon) {
         this.coupon = coupon;
         return this;
     }
@@ -43,7 +43,7 @@ public class CouponVO {
         return expDate;
     }
 
-    public CouponVO setExpDate(LocalDateTime expDate) {
+    public CouponDTO setExpDate(LocalDateTime expDate) {
         this.expDate = expDate;
         return this;
     }
@@ -52,12 +52,12 @@ public class CouponVO {
         return available;
     }
 
-    public CouponVO setAvailable(boolean available) {
+    public CouponDTO setAvailable(boolean available) {
         this.available = available;
         return this;
     }
 
-    public CouponVO build() {
-        return new CouponVO(coupon, expDate, available);
+    public CouponDTO build() {
+        return new CouponDTO(coupon, expDate, available);
     }
 }

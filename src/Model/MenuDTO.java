@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author yoosc89
  */
-public class MenuVO {
+public class MenuDTO {
 
     private String name;
 
@@ -22,10 +22,10 @@ public class MenuVO {
                 + createDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
-    public MenuVO() {
+    public MenuDTO() {
     }
 
-    public MenuVO(String name, String category, int price, LocalDateTime createDate) {
+    public MenuDTO(String name, String category, int price, LocalDateTime createDate) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -36,7 +36,7 @@ public class MenuVO {
         return name;
     }
 
-    public MenuVO setName(String name) {
+    public MenuDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -45,7 +45,7 @@ public class MenuVO {
         return category;
     }
 
-    public MenuVO setCategory(String category) {
+    public MenuDTO setCategory(String category) {
         this.category = category;
         return this;
     }
@@ -54,7 +54,7 @@ public class MenuVO {
         return price;
     }
 
-    public MenuVO setPrice(int price) {
+    public MenuDTO setPrice(int price) {
         this.price = price;
         return this;
     }
@@ -63,12 +63,12 @@ public class MenuVO {
         return createDate;
     }
 
-    public MenuVO setCreateDate(LocalDateTime createDate) {
+    public MenuDTO setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
         return this;
     }
 
-    public MenuVO build() {
-        return new MenuVO(name, category, price, createDate);
+    public MenuDTO build() {
+        return new MenuDTO(name, category, price, createDate);
     }
 }

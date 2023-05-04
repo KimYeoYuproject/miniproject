@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Controller.MenuController;
-import Model.MenuVO;
+import Model.MenuDTO;
 
 /**
  * @author yoosc89
@@ -40,7 +40,7 @@ public class CoffeMenuView {
 
         sc.nextLine();
 
-        if (this.menuController.saveByMenu(new MenuVO(name, category, price, LocalDateTime.now()))) {
+        if (this.menuController.saveByMenu(new MenuDTO(name, category, price, LocalDateTime.now()))) {
             System.out.println("메뉴 생성 성공");
         } else {
             System.out.println("같은 메뉴가 존재 합니다.");
@@ -55,7 +55,7 @@ public class CoffeMenuView {
         name = sc.nextLine();
         System.out.println(name);
 
-        MenuVO menuVO = this.menuController.findByMenu(name);
+        MenuDTO menuVO = this.menuController.findByMenu(name);
 
         if (menuVO != null) {
             System.out.println(menuVO);
@@ -67,7 +67,7 @@ public class CoffeMenuView {
     public void findAllByMenu() {
         try {
 
-            List<MenuVO> menuList = this.menuController.findAllByMenu().stream().toList();
+            List<MenuDTO> menuList = this.menuController.findAllByMenu().stream().toList();
             System.out.println("===== 정렬 방법 선택 =====");
             System.out.println("1.메뉴이름(ASC)");
             System.out.println("2.메뉴이름(DESC)");
@@ -82,22 +82,22 @@ public class CoffeMenuView {
 
             switch (number) {
                 case 1:
-                    menuList.sort(Comparator.comparing(MenuVO::getName));
+                    menuList.sort(Comparator.comparing(MenuDTO::getName));
                     break;
                 case 2:
-                    menuList.sort(Comparator.comparing(MenuVO::getName).reversed());
+                    menuList.sort(Comparator.comparing(MenuDTO::getName).reversed());
                     break;
                 case 3:
-                    menuList.sort(Comparator.comparing(MenuVO::getCategory));
+                    menuList.sort(Comparator.comparing(MenuDTO::getCategory));
                     break;
                 case 4:
-                    menuList.sort(Comparator.comparing(MenuVO::getCategory).reversed());
+                    menuList.sort(Comparator.comparing(MenuDTO::getCategory).reversed());
                     break;
                 case 5:
-                    menuList.sort(Comparator.comparing(MenuVO::getPrice));
+                    menuList.sort(Comparator.comparing(MenuDTO::getPrice));
                     break;
                 case 6:
-                    menuList.sort(Comparator.comparing(MenuVO::getPrice).reversed());
+                    menuList.sort(Comparator.comparing(MenuDTO::getPrice).reversed());
                     break;
                 case 9:
                     return;
@@ -142,7 +142,7 @@ public class CoffeMenuView {
 
     public void modifyByMenu() throws InputMismatchException {
 
-        List<MenuVO> menuList = this.menuController.findAllByMenu().stream().toList();
+        List<MenuDTO> menuList = this.menuController.findAllByMenu().stream().toList();
 
         int number = 0;
 
@@ -174,7 +174,7 @@ public class CoffeMenuView {
         price = sc.nextInt();
         sc.nextLine();
 
-        MenuVO menuVO = new MenuVO()
+        MenuDTO menuVO = new MenuDTO()
                 .setName(name == "" ? menuList.get(number).getName() : name)
                 .setCategory(category == "" ? menuList.get(number).getCategory() : category)
                 .setPrice(price == 0 ? menuList.get(number).getPrice() : price)
@@ -196,7 +196,7 @@ public class CoffeMenuView {
 
         ClearConsole.clear();
 
-        List<MenuVO> menuList = this.menuController
+        List<MenuDTO> menuList = this.menuController
                 .categoryFindAllbyMenu(categoryList.get(number))
                 .stream().toList();
 

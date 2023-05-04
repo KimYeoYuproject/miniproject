@@ -3,7 +3,7 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.OrderVO;
+import Model.OrderDTO;
 
 /**
  * @author miji
@@ -14,22 +14,22 @@ import Model.OrderVO;
 public class OrderDAO {
 
 	// 주문내역을 입력받아 배열에 저장
-	List<OrderVO> orderList = new ArrayList<>();
+	List<OrderDTO> orderList = new ArrayList<>();
 
 	// 전달받은 order 주소값을 order레퍼런스에 대입
-	public void insertOrder(OrderVO orderList2) {
+	public void insertOrder(OrderDTO orderList2) {
 		this.orderList.add(orderList2);
 	}
 
 	// 주문목록 전체값 리턴
-	public List<OrderVO> selectAll() {
+	public List<OrderDTO> selectAll() {
 		return orderList;
 	}
 
 	// 주문번호로 서치
-	public List<OrderVO> searchOrderByNo(int number) {
+	public List<OrderDTO> searchOrderByNo(int number) {
 		// 검색결과를 담아줄 orderVO 배열 생성
-		List<OrderVO> orderListNo = new ArrayList<>();
+		List<OrderDTO> orderListNo = new ArrayList<>();
 		// int count =0;
 		for (int i = 0; i < orderList.size(); i++) {
 			if (orderList.get(i).getNo() == number) {
@@ -52,8 +52,8 @@ public class OrderDAO {
 	}
 
 	// 주문자를 찾는 메소드 생성
-	public OrderVO searchOrderer(int number) {
-		OrderVO order = new OrderVO();
+	public OrderDTO searchOrderer(int number) {
+		OrderDTO order = new OrderDTO();
 
 		for (int i = 0; i < orderList.size(); i++) {
 			if (orderList.get(i).getNo() == number) {
@@ -65,9 +65,9 @@ public class OrderDAO {
 	}
 
 	// 고객번호로 서치
-	public List<OrderVO> searchOrderByOrderer(String orderer) {
+	public List<OrderDTO> searchOrderByOrderer(String orderer) {
 		// 검색결과를 담아줄 orderVO 객체배열 생성 -- 임의로 크기 10 지정
-		List<OrderVO> orderListOrderer = new ArrayList<>();
+		List<OrderDTO> orderListOrderer = new ArrayList<>();
 		int count = 0;
 		for (int i = 0; i < orderList.size(); i++) {
 			if (orderList.get(i).getOrderer().contains(orderer)) {

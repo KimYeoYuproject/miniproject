@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 import DAO.MenuDAO;
 import DAO.OrderDAO;
-import Model.MenuVO;
-import Model.OrderVO;
+import Model.MenuDTO;
+import Model.OrderDTO;
 
 /**
  * @author yoosc89
@@ -78,22 +78,22 @@ public class AdminOrderView {
     }
 
     public void findAllByOrder() {
-        List<OrderVO> orderVO = orderDAO.selectAll().stream().toList();
-        orderVO.sort(Comparator.comparing(OrderVO::getNo));
+        List<OrderDTO> orderVO = orderDAO.selectAll().stream().toList();
+        orderVO.sort(Comparator.comparing(OrderDTO::getNo));
         orderVO.forEach(System.out::println);
     }
 
-    public OrderVO randemOrderGenerator() {
+    public OrderDTO randemOrderGenerator() {
         int index = random.nextInt(new MenuDAO().findAllByMenu().size());
         boolean usedCoupon = random.nextBoolean();
-        MenuVO menuVO = new MenuDAO().findAllByMenu().get(index);
+        MenuDTO menuVO = new MenuDAO().findAllByMenu().get(index);
         StringBuilder stringBuilder = new StringBuilder("010");
         for (int j = 0; j < 8; j++) {
             int c = random.nextInt(10) + 48;
             stringBuilder.append((char) c);
 
         }
-        return new OrderVO(new Random().nextInt(30), stringBuilder.toString(),
+        return new OrderDTO(new Random().nextInt(30), stringBuilder.toString(),
                 menuVO.getName(), menuVO.getPrice(),
                 new Date(), usedCoupon);
     }
