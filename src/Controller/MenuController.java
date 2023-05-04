@@ -20,7 +20,7 @@ public class MenuController {
      * @return
      */
     public boolean saveByMenu(MenuDTO menu) {
-        if (this.menuDAO.findByMenu(menu.getName()) == null) {
+        if (this.menuDAO.findByMenu(menu.getName()).orElse(null) == null) {
             this.menuDAO.saveByMenu(menu);
             return true;
         }
@@ -34,8 +34,8 @@ public class MenuController {
      * @return
      */
     public boolean modifyByMenu(MenuDTO oldMenu, MenuDTO newMenu) {
-        MenuDTO menuVO = findByMenu(oldMenu.getName());
-        if (menuVO != null) {
+        MenuDTO menuDTO = findByMenu(oldMenu.getName());
+        if (menuDTO != null) {
             return this.menuDAO.modifyByMenu(oldMenu, newMenu);
         }
         return false;

@@ -55,10 +55,10 @@ public class CoffeMenuView {
         name = sc.nextLine();
         System.out.println(name);
 
-        MenuDTO menuVO = this.menuController.findByMenu(name);
+        MenuDTO menuDTO = this.menuController.findByMenu(name);
 
-        if (menuVO != null) {
-            System.out.println(menuVO);
+        if (menuDTO != null) {
+            System.out.println(menuDTO);
         } else {
             System.out.println("메뉴를 찾을 수 없습니다.");
         }
@@ -67,7 +67,7 @@ public class CoffeMenuView {
     public void findAllByMenu() {
         try {
 
-            List<MenuDTO> menuList = this.menuController.findAllByMenu().stream().toList();
+            List<MenuDTO> menuList = this.menuController.findAllByMenu();
             System.out.println("===== 정렬 방법 선택 =====");
             System.out.println("1.메뉴이름(ASC)");
             System.out.println("2.메뉴이름(DESC)");
@@ -174,13 +174,13 @@ public class CoffeMenuView {
         price = sc.nextInt();
         sc.nextLine();
 
-        MenuDTO menuVO = new MenuDTO()
+        MenuDTO menuDTO = new MenuDTO()
                 .setName(name == "" ? menuList.get(number).getName() : name)
                 .setCategory(category == "" ? menuList.get(number).getCategory() : category)
                 .setPrice(price == 0 ? menuList.get(number).getPrice() : price)
                 .setCreateDate(menuList.get(number).getCreateDate());
 
-        this.menuController.modifyByMenu(menuList.get(number), menuVO);
+        this.menuController.modifyByMenu(menuList.get(number), menuDTO);
     }
 
     public void categoryFindAllbyMenu() throws InputMismatchException {
